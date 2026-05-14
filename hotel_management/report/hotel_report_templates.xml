@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== HOTEL INVOICE REPORT ACTION ==================== -->
+    <record id="action_report_hotel_invoice" model="ir.actions.report">
+        <field name="name">Hotel Invoice</field>
+        <field name="model">hotel.folio</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hotel_management.report_hotel_invoice_document</field>
+        <field name="report_file">hotel_management.report_hotel_invoice_document</field>
+        <field name="binding_model_id" ref="model_hotel_folio"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <!-- ==================== DRIVER SLIP REPORT ACTION ==================== -->
+    <record id="action_report_driver_slip" model="ir.actions.report">
+        <field name="name">Driver Trip Slip</field>
+        <field name="model">hotel.transport.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hotel_management.report_driver_slip_document</field>
+        <field name="report_file">hotel_management.report_driver_slip_document</field>
+        <field name="binding_model_id" ref="model_hotel_transport_request"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+</odoo>

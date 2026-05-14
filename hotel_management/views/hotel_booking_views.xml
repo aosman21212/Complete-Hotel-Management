@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== HOTEL BOOKING LIST ==================== -->
+    <record id="view_hotel_booking_list" model="ir.ui.view">
+        <field name="name">hotel.booking.list</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <list string="Bookings" decoration-muted="state == 'cancel'" decoration-info="state == 'draft'" decoration-success="state == 'check_out'">
+                <field name="name"/>
+                <field name="guest_name"/>
+                <field name="phone"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="adults"/>
+                <field name="children"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL BOOKING FORM ==================== -->
+    <record id="view_hotel_booking_form" model="ir.ui.view">
+        <field name="name">hotel.booking.form</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Booking">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            invisible="state != 'draft'"
+                            class="btn-primary"/>
+                    <button name="action_check_in" string="Check In" type="object"
+                            invisible="state != 'confirm'"
+                            class="btn-primary"/>
+                    <button name="action_check_out" string="Check Out" type="object"
+                            invisible="state != 'check_in'"
+                            class="btn-primary"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('check_out', 'cancel')"
+                            class="btn-danger"/>
+                    <button name="action_no_show" string="No Show" type="object"
+                            invisible="state != 'confirm'"
+                            class="btn-warning"/>
+                    <button name="action_reset_draft" string="Reset to Draft" type="object"
+                            invisible="state not in ('cancel', 'no_show')"
+                            class="btn-secondary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm,check_in,check_out"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_folio" type="object"
+                                class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="not folio_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Folio</span>
+                            </div>
+                        </button>
+                        <button name="action_view_laundry" type="object"
+                                class="oe_stat_button" icon="fa-tshirt">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="laundry_count"/></span>
+                                <span class="o_stat_text">Laundry</span>
+                            </div>
+                        </button>
+                        <button name="action_view_restaurant" type="object"
+                                class="oe_stat_button" icon="fa-cutlery">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="restaurant_count"/></span>
+                                <span class="o_stat_text">Restaurant</span>
+                            </div>
+                        </button>
+                        <button name="action_view_transport" type="object"
+                                class="oe_stat_button" icon="fa-car">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="transport_count"/></span>
+                                <span class="o_stat_text">Transport</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Booking Info">
+                            <field name="name" readonly="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Guest Info">
+                            <field name="guest_name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Booking Details">
+                            <group>
+                                <group string="Dates">
+                                    <field name="check_in"/>
+                                    <field name="check_out"/>
+                                </group>
+                                <group string="Guests">
+                                    <field name="adults"/>
+                                    <field name="children"/>
+                                    <field name="total_guests"/>
+                                </group>
+                            </group>
+                            <separator string="Rooms"/>
+                            <field name="room_ids">
+                                <list editable="bottom">
+                                    <field name="room_id"/>
+                                    <field name="check_in" optional="show"/>
+                                    <field name="check_out" optional="show"/>
+                                    <field name="nights"/>
+                                    <field name="rate_per_night"/>
+                                    <field name="extra_person_count"/>
+                                    <field name="extra_person_charge"/>
+                                    <field name="room_subtotal"/>
+                                    <field name="notes" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Guests">
+                            <field name="guest_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="room_id"/>
+                                    <field name="document_type_id"/>
+                                    <field name="document_number"/>
+                                    <field name="document_file" widget="binary" optional="hide"/>
+                                    <field name="document_filename" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Room Changes">
+                            <field name="room_change_ids" readonly="1">
+                                <list>
+                                    <field name="change_date"/>
+                                    <field name="room_from_id"/>
+                                    <field name="room_to_id"/>
+                                    <field name="reason"/>
+                                    <field name="user_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL BOOKING SEARCH ==================== -->
+    <record id="view_hotel_booking_search" model="ir.ui.view">
+        <field name="name">hotel.booking.search</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <search string="Search Bookings">
+                <field name="name"/>
+                <field name="guest_name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirm')]"/>
+                <filter string="Checked In" name="check_in" domain="[('state', '=', 'check_in')]"/>
+                <filter string="Checked Out" name="check_out" domain="[('state', '=', 'check_out')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancel')]"/>
+                <filter string="No Show" name="no_show" domain="[('state', '=', 'no_show')]"/>
+                <separator/>
+                <filter string="Today Check-In" name="today_checkin" domain="[('check_in', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Today Check-Out" name="today_checkout" domain="[('check_out', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Check-In Date" name="group_checkin" context="{'group_by': 'check_in'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hotel_booking" model="ir.actions.act_window">
+        <field name="name">Bookings</field>
+        <field name="res_model">hotel.booking</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_hotel_booking_search"/>
+        <field name="context">{'search_default_confirmed': 1}</field>
+    </record>
+
+</odoo>

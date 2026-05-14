@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== HOTEL RESTAURANT ORDER LIST ==================== -->
+    <record id="view_hotel_restaurant_order_list" model="ir.ui.view">
+        <field name="name">hotel.restaurant.order.list</field>
+        <field name="model">hotel.restaurant.order</field>
+        <field name="arch" type="xml">
+            <list string="Restaurant Orders">
+                <field name="name"/>
+                <field name="order_date"/>
+                <field name="booking_id"/>
+                <field name="room_id"/>
+                <field name="total_amount"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL RESTAURANT ORDER FORM ==================== -->
+    <record id="view_hotel_restaurant_order_form" model="ir.ui.view">
+        <field name="name">hotel.restaurant.order.form</field>
+        <field name="model">hotel.restaurant.order</field>
+        <field name="arch" type="xml">
+            <form string="Restaurant Order">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            invisible="state != 'draft'"
+                            class="btn-primary"/>
+                    <button name="action_prepare" string="In Preparation" type="object"
+                            invisible="state != 'confirmed'"
+                            class="btn-primary"/>
+                    <button name="action_deliver" string="Deliver" type="object"
+                            invisible="state != 'in_preparation'"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,in_preparation,delivered"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Order Info">
+                            <field name="name" readonly="1"/>
+                            <field name="order_date"/>
+                        </group>
+                        <group string="Room &amp; Booking">
+                            <field name="booking_id"/>
+                            <field name="folio_id"/>
+                            <field name="room_id"/>
+                        </group>
+                    </group>
+                    <separator string="Items"/>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="product_name"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="subtotal"/>
+                        </list>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total_amount" widget="monetary"/>
+                    </group>
+                    <separator string="Notes"/>
+                    <field name="notes" nolabel="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL RESTAURANT ORDER SEARCH ==================== -->
+    <record id="view_hotel_restaurant_order_search" model="ir.ui.view">
+        <field name="name">hotel.restaurant.order.search</field>
+        <field name="model">hotel.restaurant.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Restaurant Orders">
+                <field name="name"/>
+                <field name="booking_id"/>
+                <field name="room_id"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="In Preparation" name="in_preparation" domain="[('state', '=', 'in_preparation')]"/>
+                <filter string="Delivered" name="delivered" domain="[('state', '=', 'delivered')]"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Room" name="group_room" context="{'group_by': 'room_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hotel_restaurant_order" model="ir.actions.act_window">
+        <field name="name">Restaurant Orders</field>
+        <field name="res_model">hotel.restaurant.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_hotel_restaurant_order_search"/>
+    </record>
+
+</odoo>

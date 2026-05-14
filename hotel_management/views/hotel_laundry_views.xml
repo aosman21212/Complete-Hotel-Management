@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== HOTEL LAUNDRY ORDER LIST ==================== -->
+    <record id="view_hotel_laundry_order_list" model="ir.ui.view">
+        <field name="name">hotel.laundry.order.list</field>
+        <field name="model">hotel.laundry.order</field>
+        <field name="arch" type="xml">
+            <list string="Laundry Orders">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="booking_id"/>
+                <field name="room_id"/>
+                <field name="total_amount"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL LAUNDRY ORDER FORM ==================== -->
+    <record id="view_hotel_laundry_order_form" model="ir.ui.view">
+        <field name="name">hotel.laundry.order.form</field>
+        <field name="model">hotel.laundry.order</field>
+        <field name="arch" type="xml">
+            <form string="Laundry Order">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            invisible="state != 'draft'"
+                            class="btn-primary"/>
+                    <button name="action_pickup" string="Pickup" type="object"
+                            invisible="state != 'confirm'"
+                            class="btn-primary"/>
+                    <button name="action_in_process" string="In Process" type="object"
+                            invisible="state != 'pickup'"
+                            class="btn-primary"/>
+                    <button name="action_deliver" string="Deliver" type="object"
+                            invisible="state != 'in_process'"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm,pickup,in_process,deliver"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Order Info">
+                            <field name="name" readonly="1"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Room &amp; Booking">
+                            <field name="booking_id"/>
+                            <field name="folio_id"/>
+                            <field name="room_id"/>
+                        </group>
+                    </group>
+                    <separator string="Items"/>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="item_name"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="subtotal"/>
+                        </list>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total_amount" widget="monetary"/>
+                    </group>
+                    <separator string="Notes"/>
+                    <field name="notes" nolabel="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== HOTEL LAUNDRY ORDER SEARCH ==================== -->
+    <record id="view_hotel_laundry_order_search" model="ir.ui.view">
+        <field name="name">hotel.laundry.order.search</field>
+        <field name="model">hotel.laundry.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Laundry Orders">
+                <field name="name"/>
+                <field name="booking_id"/>
+                <field name="room_id"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirm')]"/>
+                <filter string="Pickup" name="pickup" domain="[('state', '=', 'pickup')]"/>
+                <filter string="In Process" name="in_process" domain="[('state', '=', 'in_process')]"/>
+                <filter string="Delivered" name="delivered" domain="[('state', '=', 'deliver')]"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Room" name="group_room" context="{'group_by': 'room_id'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hotel_laundry_order" model="ir.actions.act_window">
+        <field name="name">Laundry Orders</field>
+        <field name="res_model">hotel.laundry.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_hotel_laundry_order_search"/>
+    </record>
+
+</odoo>

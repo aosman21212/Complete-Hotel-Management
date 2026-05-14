@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== HOTEL FLOOR ==================== -->
+    <record id="view_hotel_floor_list" model="ir.ui.view">
+        <field name="name">hotel.floor.list</field>
+        <field name="model">hotel.floor</field>
+        <field name="arch" type="xml">
+            <list string="Floors">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hotel_floor_form" model="ir.ui.view">
+        <field name="name">hotel.floor.form</field>
+        <field name="model">hotel.floor</field>
+        <field name="arch" type="xml">
+            <form string="Floor">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_floor" model="ir.actions.act_window">
+        <field name="name">Floors</field>
+        <field name="res_model">hotel.floor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ==================== HOTEL ROOM TYPE ==================== -->
+    <record id="view_hotel_room_type_list" model="ir.ui.view">
+        <field name="name">hotel.room.type.list</field>
+        <field name="model">hotel.room.type</field>
+        <field name="arch" type="xml">
+            <list string="Room Types">
+                <field name="name"/>
+                <field name="capacity_adults"/>
+                <field name="capacity_children"/>
+                <field name="base_price"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hotel_room_type_form" model="ir.ui.view">
+        <field name="name">hotel.room.type.form</field>
+        <field name="model">hotel.room.type</field>
+        <field name="arch" type="xml">
+            <form string="Room Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="base_price"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="capacity_adults"/>
+                            <field name="capacity_children"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_room_type" model="ir.actions.act_window">
+        <field name="name">Room Types</field>
+        <field name="res_model">hotel.room.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ==================== HOTEL ROOM FACILITY ==================== -->
+    <record id="view_hotel_room_facility_list" model="ir.ui.view">
+        <field name="name">hotel.room.facility.list</field>
+        <field name="model">hotel.room.facility</field>
+        <field name="arch" type="xml">
+            <list string="Facilities">
+                <field name="name"/>
+                <field name="icon"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hotel_room_facility_form" model="ir.ui.view">
+        <field name="name">hotel.room.facility.form</field>
+        <field name="model">hotel.room.facility</field>
+        <field name="arch" type="xml">
+            <form string="Facility">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="icon" placeholder="e.g. fa-wifi"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_room_facility" model="ir.actions.act_window">
+        <field name="name">Room Facilities</field>
+        <field name="res_model">hotel.room.facility</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ==================== HOTEL DOCUMENT TYPE ==================== -->
+    <record id="view_hotel_document_type_list" model="ir.ui.view">
+        <field name="name">hotel.document.type.list</field>
+        <field name="model">hotel.document.type</field>
+        <field name="arch" type="xml">
+            <list string="Document Types">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hotel_document_type_form" model="ir.ui.view">
+        <field name="name">hotel.document.type.form</field>
+        <field name="model">hotel.document.type</field>
+        <field name="arch" type="xml">
+            <form string="Document Type">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_document_type" model="ir.actions.act_window">
+        <field name="name">Document Types</field>
+        <field name="res_model">hotel.document.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ==================== HOTEL SEASONAL RATE ==================== -->
+    <record id="view_hotel_seasonal_rate_list" model="ir.ui.view">
+        <field name="name">hotel.seasonal.rate.list</field>
+        <field name="model">hotel.seasonal.rate</field>
+        <field name="arch" type="xml">
+            <list string="Seasonal Rates">
+                <field name="name"/>
+                <field name="room_type_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="price_per_night"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hotel_seasonal_rate_form" model="ir.ui.view">
+        <field name="name">hotel.seasonal.rate.form</field>
+        <field name="model">hotel.seasonal.rate</field>
+        <field name="arch" type="xml">
+            <form string="Seasonal Rate">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="room_type_id"/>
+                            <field name="price_per_night"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_seasonal_rate" model="ir.actions.act_window">
+        <field name="name">Seasonal Rates</field>
+        <field name="res_model">hotel.seasonal.rate</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

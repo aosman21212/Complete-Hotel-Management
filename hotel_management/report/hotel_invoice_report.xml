@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_hotel_invoice_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="folio">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- ===== INVOICE HEADER ===== -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2 style="color:#1a5276; font-weight:bold;">HOTEL INVOICE</h2>
+                                <table class="table table-sm table-borderless" style="width:auto;">
+                                    <tr>
+                                        <td class="text-muted" style="padding:2px 8px 2px 0;">Folio No.:</td>
+                                        <td style="padding:2px 0;"><strong><t t-esc="folio.name"/></strong></td>
+                                    </tr>
+                                    <tr t-if="folio.booking_id">
+                                        <td class="text-muted" style="padding:2px 8px 2px 0;">Booking Ref.:</td>
+                                        <td style="padding:2px 0;"><t t-esc="folio.booking_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted" style="padding:2px 8px 2px 0;">Date Issued:</td>
+                                        <td style="padding:2px 0;"><t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted" style="padding:2px 8px 2px 0;">Status:</td>
+                                        <td style="padding:2px 0;">
+                                            <span t-attf-style="background:{'#28a745' if folio.state == 'closed' else '#007bff'}; color:white; padding:2px 8px; border-radius:4px; font-size:11px;">
+                                                <t t-esc="dict(folio._fields['state'].selection).get(folio.state, folio.state)"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6 text-right">
+                                <div style="background:#1a5276; color:white; padding:12px 20px; border-radius:6px; display:inline-block; text-align:right;">
+                                    <div style="font-size:24px; font-weight:bold;">FOLIO</div>
+                                    <div style="font-size:14px; opacity:0.9;"><t t-esc="folio.name"/></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== GUEST INFORMATION ===== -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border-left:4px solid #1a5276; padding:12px 16px; border-radius:4px;">
+                                    <h5 style="color:#1a5276; margin-bottom:8px;">Guest Information</h5>
+                                    <div><strong><t t-esc="folio.guest_name or 'Guest'"/></strong></div>
+                                    <div t-if="folio.booking_id and folio.booking_id.phone" class="text-muted">
+                                        <t t-esc="folio.booking_id.phone"/>
+                                    </div>
+                                    <div t-if="folio.booking_id and folio.booking_id.email" class="text-muted">
+                                        <t t-esc="folio.booking_id.email"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border-left:4px solid #28a745; padding:12px 16px; border-radius:4px;">
+                                    <h5 style="color:#28a745; margin-bottom:8px;">Stay Details</h5>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td class="text-muted p-0 pr-3">Check-In:</td>
+                                            <td class="p-0"><strong><t t-esc="folio.check_in and folio.check_in.strftime('%d %b %Y') or '-'"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted p-0 pr-3">Check-Out:</td>
+                                            <td class="p-0"><strong><t t-esc="folio.check_out and folio.check_out.strftime('%d %b %Y') or '-'"/></strong></td>
+                                        </tr>
+                                        <tr t-if="folio.booking_id">
+                                            <td class="text-muted p-0 pr-3">Guests:</td>
+                                            <td class="p-0">
+                                                <t t-esc="folio.booking_id.adults"/> Adult(s)
+                                                <t t-if="folio.booking_id.children">, <t t-esc="folio.booking_id.children"/> Child(ren)</t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== ROOM CHARGES ===== -->
+                        <t t-set="room_lines" t-value="folio.line_ids.filtered(lambda l: l.category == 'room')"/>
+                        <t t-if="room_lines">
+                            <h5 style="color:#1a5276; border-bottom:2px solid #1a5276; padding-bottom:4px; margin-bottom:8px;">Room Charges</h5>
+                            <table class="table table-sm table-striped mb-3">
+                                <thead style="background:#1a5276; color:white;">
+                                    <tr>
+                                        <th style="padding:8px;">Description</th>
+                                        <th class="text-center" style="padding:8px; width:80px;">Nights</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Rate/Night</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="room_lines" t-as="line">
+                                        <tr>
+                                            <td style="padding:6px 8px;"><t t-esc="line.description"/></td>
+                                            <td class="text-center" style="padding:6px 8px;"><t t-esc="'%.0f' % line.quantity"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><t t-esc="'%.2f' % line.unit_price"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % line.amount"/></strong></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right" style="padding:6px 8px;"><strong>Room Total:</strong></td>
+                                        <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % sum(room_lines.mapped('amount'))"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- ===== LAUNDRY CHARGES ===== -->
+                        <t t-set="laundry_lines" t-value="folio.line_ids.filtered(lambda l: l.category == 'laundry')"/>
+                        <t t-if="laundry_lines">
+                            <h5 style="color:#6f42c1; border-bottom:2px solid #6f42c1; padding-bottom:4px; margin-bottom:8px;">Laundry Services</h5>
+                            <table class="table table-sm table-striped mb-3">
+                                <thead style="background:#6f42c1; color:white;">
+                                    <tr>
+                                        <th style="padding:8px;">Description</th>
+                                        <th class="text-center" style="padding:8px; width:80px;">Qty</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Unit Price</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="laundry_lines" t-as="line">
+                                        <tr>
+                                            <td style="padding:6px 8px;"><t t-esc="line.description"/></td>
+                                            <td class="text-center" style="padding:6px 8px;"><t t-esc="'%.0f' % line.quantity"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><t t-esc="'%.2f' % line.unit_price"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % line.amount"/></strong></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right" style="padding:6px 8px;"><strong>Laundry Total:</strong></td>
+                                        <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % sum(laundry_lines.mapped('amount'))"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- ===== RESTAURANT CHARGES ===== -->
+                        <t t-set="restaurant_lines" t-value="folio.line_ids.filtered(lambda l: l.category == 'restaurant')"/>
+                        <t t-if="restaurant_lines">
+                            <h5 style="color:#fd7e14; border-bottom:2px solid #fd7e14; padding-bottom:4px; margin-bottom:8px;">Restaurant &amp; Food</h5>
+                            <table class="table table-sm table-striped mb-3">
+                                <thead style="background:#fd7e14; color:white;">
+                                    <tr>
+                                        <th style="padding:8px;">Description</th>
+                                        <th class="text-center" style="padding:8px; width:80px;">Qty</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Unit Price</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="restaurant_lines" t-as="line">
+                                        <tr>
+                                            <td style="padding:6px 8px;"><t t-esc="line.description"/></td>
+                                            <td class="text-center" style="padding:6px 8px;"><t t-esc="'%.0f' % line.quantity"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><t t-esc="'%.2f' % line.unit_price"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % line.amount"/></strong></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right" style="padding:6px 8px;"><strong>Restaurant Total:</strong></td>
+                                        <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % sum(restaurant_lines.mapped('amount'))"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- ===== TRANSPORT CHARGES ===== -->
+                        <t t-set="transport_lines" t-value="folio.line_ids.filtered(lambda l: l.category == 'transport')"/>
+                        <t t-if="transport_lines">
+                            <h5 style="color:#20c997; border-bottom:2px solid #20c997; padding-bottom:4px; margin-bottom:8px;">Transportation</h5>
+                            <table class="table table-sm table-striped mb-3">
+                                <thead style="background:#20c997; color:white;">
+                                    <tr>
+                                        <th style="padding:8px;">Description</th>
+                                        <th class="text-center" style="padding:8px; width:80px;">Qty</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Unit Price</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="transport_lines" t-as="line">
+                                        <tr>
+                                            <td style="padding:6px 8px;"><t t-esc="line.description"/></td>
+                                            <td class="text-center" style="padding:6px 8px;"><t t-esc="'%.0f' % line.quantity"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><t t-esc="'%.2f' % line.unit_price"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % line.amount"/></strong></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right" style="padding:6px 8px;"><strong>Transport Total:</strong></td>
+                                        <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % sum(transport_lines.mapped('amount'))"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- ===== EXTRA SERVICES ===== -->
+                        <t t-set="extra_lines" t-value="folio.line_ids.filtered(lambda l: l.category == 'extra')"/>
+                        <t t-if="extra_lines">
+                            <h5 style="color:#6c757d; border-bottom:2px solid #6c757d; padding-bottom:4px; margin-bottom:8px;">Extra Services</h5>
+                            <table class="table table-sm table-striped mb-3">
+                                <thead style="background:#6c757d; color:white;">
+                                    <tr>
+                                        <th style="padding:8px;">Description</th>
+                                        <th class="text-center" style="padding:8px; width:80px;">Qty</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Unit Price</th>
+                                        <th class="text-right" style="padding:8px; width:120px;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="extra_lines" t-as="line">
+                                        <tr>
+                                            <td style="padding:6px 8px;"><t t-esc="line.description"/></td>
+                                            <td class="text-center" style="padding:6px 8px;"><t t-esc="'%.0f' % line.quantity"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><t t-esc="'%.2f' % line.unit_price"/></td>
+                                            <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % line.amount"/></strong></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right" style="padding:6px 8px;"><strong>Extra Services Total:</strong></td>
+                                        <td class="text-right" style="padding:6px 8px;"><strong><t t-esc="'%.2f' % sum(extra_lines.mapped('amount'))"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- ===== GRAND TOTAL ===== -->
+                        <div class="row justify-content-end mt-3">
+                            <div class="col-5">
+                                <table class="table table-sm mb-0">
+                                    <tr>
+                                        <td class="text-right" style="padding:8px; border-top:1px solid #dee2e6;">
+                                            <h4 style="margin:0; color:#1a5276;">
+                                                Grand Total:
+                                                <span style="float:right; margin-left:20px;">
+                                                    <t t-esc="'%.2f' % folio.total_amount"/>
+                                                </span>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- ===== NOTES ===== -->
+                        <t t-if="folio.notes">
+                            <div class="mt-4" style="border-top:1px solid #dee2e6; padding-top:12px;">
+                                <strong>Notes:</strong>
+                                <p class="text-muted"><t t-esc="folio.notes"/></p>
+                            </div>
+                        </t>
+
+                        <!-- ===== FOOTER MESSAGE ===== -->
+                        <div class="mt-4 text-center" style="border-top:2px solid #1a5276; padding-top:16px; color:#6c757d; font-size:12px;">
+                            <p>Thank you for choosing our hotel. We look forward to welcoming you again.</p>
+                            <p>For any billing queries, please contact the front desk.</p>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_driver_slip_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="trip">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- ===== SLIP HEADER ===== -->
+                        <div class="text-center mb-4">
+                            <div style="background:#1a5276; color:white; padding:16px 24px; border-radius:8px; display:inline-block; min-width:300px;">
+                                <h2 style="margin:0 0 4px 0; font-weight:bold; letter-spacing:2px;">DRIVER TRIP SLIP</h2>
+                                <div style="font-size:13px; opacity:0.85;">
+                                    <t t-esc="trip.name"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== GUEST & BOOKING INFO ===== -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:6px; padding:14px 16px;">
+                                    <h6 style="color:#1a5276; font-weight:bold; margin-bottom:10px; border-bottom:1px solid #dee2e6; padding-bottom:6px;">
+                                        GUEST INFORMATION
+                                    </h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Name:</td>
+                                            <td style="padding:3px 0;"><strong><t t-esc="trip.guest_name or (trip.booking_id and trip.booking_id.guest_name) or '-'"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Phone:</td>
+                                            <td style="padding:3px 0;"><t t-esc="trip.phone or (trip.booking_id and trip.booking_id.phone) or '-'"/></td>
+                                        </tr>
+                                        <tr t-if="trip.booking_id">
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Booking:</td>
+                                            <td style="padding:3px 0;"><t t-esc="trip.booking_id.name"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:6px; padding:14px 16px;">
+                                    <h6 style="color:#1a5276; font-weight:bold; margin-bottom:10px; border-bottom:1px solid #dee2e6; padding-bottom:6px;">
+                                        TRIP INFORMATION
+                                    </h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Trip Type:</td>
+                                            <td style="padding:3px 0;">
+                                                <strong>
+                                                    <t t-esc="dict(trip._fields['trip_type'].selection).get(trip.trip_type, trip.trip_type or '-')"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Vehicle:</td>
+                                            <td style="padding:3px 0;">
+                                                <t t-esc="dict(trip._fields['vehicle_type'].selection).get(trip.vehicle_type, trip.vehicle_type or '-')"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d; white-space:nowrap;">Status:</td>
+                                            <td style="padding:3px 0;">
+                                                <span t-attf-style="background:#007bff; color:white; padding:2px 8px; border-radius:4px; font-size:11px;">
+                                                    <t t-esc="dict(trip._fields['state'].selection).get(trip.state, trip.state)"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== ROUTE DETAILS ===== -->
+                        <div class="mb-3" style="background:#fff3cd; border:1px solid #ffc107; border-radius:6px; padding:16px 20px;">
+                            <h6 style="color:#856404; font-weight:bold; margin-bottom:12px;">
+                                ROUTE DETAILS
+                            </h6>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <div style="background:#1a5276; color:white; padding:10px 14px; border-radius:6px;">
+                                        <div style="font-size:11px; opacity:0.8; margin-bottom:4px;">PICKUP FROM</div>
+                                        <div style="font-weight:bold; font-size:14px;">
+                                            <t t-esc="trip.pickup_location_id.name if trip.pickup_location_id else 'Hotel'"/>
+                                        </div>
+                                        <div t-if="trip.pickup_location_id and trip.pickup_location_id.address" style="font-size:11px; opacity:0.8; margin-top:4px;">
+                                            <t t-esc="trip.pickup_location_id.address"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div style="font-size:28px; color:#856404;">&#8594;</div>
+                                    <div style="font-size:11px; color:#856404; font-weight:bold;">
+                                        <t t-esc="'%.1f' % (trip.distance_km or 0)"/> KM
+                                    </div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <div style="background:#28a745; color:white; padding:10px 14px; border-radius:6px;">
+                                        <div style="font-size:11px; opacity:0.8; margin-bottom:4px;">DROP AT</div>
+                                        <div style="font-weight:bold; font-size:14px;">
+                                            <t t-esc="trip.drop_location_id.name if trip.drop_location_id else 'Hotel'"/>
+                                        </div>
+                                        <div t-if="trip.drop_location_id and trip.drop_location_id.address" style="font-size:11px; opacity:0.8; margin-top:4px;">
+                                            <t t-esc="trip.drop_location_id.address"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== SCHEDULE & DRIVER ===== -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:6px; padding:14px 16px;">
+                                    <h6 style="color:#28a745; font-weight:bold; margin-bottom:10px; border-bottom:1px solid #dee2e6; padding-bottom:6px;">
+                                        SCHEDULE
+                                    </h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d;">Pickup Date:</td>
+                                            <td style="padding:3px 0;"><strong><t t-esc="trip.pickup_datetime and trip.pickup_datetime.strftime('%d %b %Y') or '-'"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d;">Pickup Time:</td>
+                                            <td style="padding:3px 0;"><strong><t t-esc="trip.pickup_datetime and trip.pickup_datetime.strftime('%H:%M') or '-'"/></strong></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="background:#f8f9fa; border:1px solid #dee2e6; border-radius:6px; padding:14px 16px;">
+                                    <h6 style="color:#6f42c1; font-weight:bold; margin-bottom:10px; border-bottom:1px solid #dee2e6; padding-bottom:6px;">
+                                        DRIVER DETAILS
+                                    </h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d;">Name:</td>
+                                            <td style="padding:3px 0;"><strong><t t-esc="trip.driver_name or '-'"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:3px 8px 3px 0; color:#6c757d;">Phone:</td>
+                                            <td style="padding:3px 0;"><t t-esc="trip.driver_phone or '-'"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== CHARGE SUMMARY ===== -->
+                        <div style="background:#1a5276; color:white; border-radius:6px; padding:14px 20px; margin-bottom:24px;">
+                            <div class="row align-items-center">
+                                <div class="col-4">
+                                    <div style="font-size:12px; opacity:0.8;">DISTANCE</div>
+                                    <div style="font-size:20px; font-weight:bold;"><t t-esc="'%.1f' % (trip.distance_km or 0)"/> KM</div>
+                                </div>
+                                <div class="col-4 text-center" style="border-left:1px solid rgba(255,255,255,0.3); border-right:1px solid rgba(255,255,255,0.3);">
+                                    <div style="font-size:12px; opacity:0.8;">VEHICLE TYPE</div>
+                                    <div style="font-size:16px; font-weight:bold;">
+                                        <t t-esc="dict(trip._fields['vehicle_type'].selection).get(trip.vehicle_type, '-')"/>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <div style="font-size:12px; opacity:0.8;">TOTAL CHARGE</div>
+                                    <div style="font-size:24px; font-weight:bold;"><t t-esc="'%.2f' % (trip.charge or 0)"/></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== NOTES ===== -->
+                        <t t-if="trip.notes">
+                            <div class="mb-3" style="border:1px solid #dee2e6; border-radius:6px; padding:12px 16px;">
+                                <strong>Special Instructions:</strong>
+                                <p class="mb-0 text-muted"><t t-esc="trip.notes"/></p>
+                            </div>
+                        </t>
+
+                        <!-- ===== SIGNATURE BLOCK ===== -->
+                        <div class="row mt-4">
+                            <div class="col-4 text-center">
+                                <div style="border-top:1px solid #333; margin-top:40px; padding-top:6px; font-size:11px; color:#6c757d;">
+                                    Driver Signature
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div style="border-top:1px solid #333; margin-top:40px; padding-top:6px; font-size:11px; color:#6c757d;">
+                                    Guest Signature
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div style="border-top:1px solid #333; margin-top:40px; padding-top:6px; font-size:11px; color:#6c757d;">
+                                    Authorized By
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== PRINT FOOTER ===== -->
+                        <div class="text-center mt-4" style="border-top:2px solid #1a5276; padding-top:10px; font-size:11px; color:#6c757d;">
+                            <span>Slip Reference: <t t-esc="trip.name"/></span>
+                            &#160;|&#160;
+                            <span>Printed: <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y %H:%M')"/></span>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

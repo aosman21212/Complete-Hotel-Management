@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Hotel Management System — Odoo 19</title>
+</head>
+<body>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a2e;background:#fff;line-height:1.6}
+
+.hero{background:linear-gradient(135deg,#1a3c5e 0%,#0d7377 60%,#0a5568 100%);color:#fff;padding:64px 40px 56px;text-align:center}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:6px 22px;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;font-weight:700}
+.hero h1{font-size:2.8rem;font-weight:800;margin-bottom:14px;letter-spacing:-.5px}
+.hero h1 span{color:#f4a022}
+.hero p{font-size:1.1rem;opacity:.9;max-width:660px;margin:0 auto 28px}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.hp{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px;font-size:.82rem;font-weight:600}
+
+section{padding:56px 40px;max-width:1060px;margin:0 auto}
+.lbl{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0d7377;margin-bottom:10px}
+h2{font-size:1.9rem;font-weight:800;color:#1a3c5e;margin-bottom:12px;line-height:1.25}
+h2 span{color:#0d7377}
+.lead{font-size:1rem;color:#4a5568;max-width:700px;margin-bottom:36px}
+
+.ss{margin-bottom:52px}
+.ss h3{font-size:1.2rem;font-weight:700;color:#1a3c5e;margin-bottom:8px}
+.ss p{color:#4a5568;margin-bottom:14px;font-size:.94rem}
+.ss img{width:100%;border-radius:10px;box-shadow:0 6px 32px rgba(26,60,94,.18);border:1px solid #e2e8f0;display:block}
+.cap{font-size:.8rem;color:#718096;margin-top:8px;text-align:center;font-style:italic}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:24px 20px;border-left:4px solid #0d7377}
+.card.c1{border-color:#1a3c5e}.card.c2{border-color:#0d7377}.card.c3{border-color:#f4a022}
+.card.c4{border-color:#8e44ad}.card.c5{border-color:#27ae60}.card.c6{border-color:#e67e22}
+.icon{font-size:1.7rem;margin-bottom:10px}
+.card h4{font-size:.97rem;font-weight:700;color:#1a3c5e;margin-bottom:7px}
+.card p{font-size:.86rem;color:#4a5568;line-height:1.5}
+
+.flow{background:linear-gradient(135deg,#1a3c5e,#0d7377);border-radius:14px;padding:48px 36px;color:#fff;margin-bottom:56px}
+.flow h2{color:#fff;margin-bottom:8px}
+.flow .lead{color:rgba(255,255,255,.82);margin-bottom:32px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:18px 14px;text-align:center}
+.num{width:34px;height:34px;border-radius:50%;background:#f4a022;color:#1a3c5e;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.step h4{font-size:.9rem;font-weight:700;margin-bottom:5px}
+.step p{font-size:.76rem;opacity:.82}
+
+.svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+.svc{border-radius:10px;padding:26px 20px;text-align:center;color:#fff}
+.svc.ldy{background:linear-gradient(135deg,#8e44ad,#6c3483)}
+.svc.rst{background:linear-gradient(135deg,#e67e22,#ca6f1e)}
+.svc.trn{background:linear-gradient(135deg,#0d7377,#0a5568)}
+.svc-icon{font-size:2.4rem;margin-bottom:12px}
+.svc h4{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.svc p{font-size:.86rem;opacity:.9;line-height:1.5}
+.stages{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:12px}
+.stg{background:rgba(255,255,255,.2);border-radius:10px;padding:2px 9px;font-size:.73rem;font-weight:600}
+
+table.roles{width:100%;border-collapse:collapse;margin-bottom:36px;font-size:.88rem}
+table.roles th{background:#1a3c5e;color:#fff;padding:11px 14px;text-align:left;font-weight:600}
+table.roles td{padding:11px 14px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+table.roles tr:nth-child(even) td{background:#f8fafc}
+.rb{display:inline-block;padding:3px 11px;border-radius:10px;font-size:.76rem;font-weight:700;color:#fff}
+.rb-a{background:#1a3c5e}.rb-r{background:#0d7377}.rb-l{background:#8e44ad}.rb-rs{background:#e67e22}
+
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:36px}
+.spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px}
+.spec-i{font-size:1.3rem;flex-shrink:0}
+.spec h5{font-size:.88rem;font-weight:700;color:#1a3c5e;margin-bottom:3px}
+.spec p{font-size:.8rem;color:#4a5568}
+
+.cta{background:linear-gradient(135deg,#1a3c5e,#0d7377);border-radius:14px;padding:48px 36px;text-align:center;color:#fff}
+.cta h2{color:#fff;font-size:1.85rem;margin-bottom:10px}
+.cta p{opacity:.9;margin-bottom:24px;font-size:1rem}
+.cta-p{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.cp{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:7px 20px;font-size:.86rem;font-weight:600}
+
+.contact{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:28px 32px;margin-bottom:40px}
+.contact h3{font-size:1.1rem;font-weight:700;color:#1a3c5e;margin-bottom:16px}
+.contact table{border-collapse:collapse;width:auto}
+.contact td{padding:5px 20px 5px 0;font-size:.9rem;color:#4a5568;vertical-align:top}
+.contact td:first-child{font-weight:700;color:#1a3c5e;white-space:nowrap}
+
+hr.div{border:none;border-top:1px solid #e2e8f0;margin:0}
+</style>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-badge">Odoo 19 · Hotel Management System</div>
+  <h1>Complete <span>Hotel Management</span><br/>for Odoo 19</h1>
+  <p>Manage rooms, bookings, guest services, billing, and daily operations from one organized platform built natively inside Odoo.</p>
+  <div class="hero-pills">
+    <span class="hp">🏨 Room Management</span>
+    <span class="hp">📅 Bookings &amp; Check-In/Out</span>
+    <span class="hp">🧾 Folio &amp; Invoicing</span>
+    <span class="hp">👕 Laundry Service</span>
+    <span class="hp">🍽️ Restaurant Orders</span>
+    <span class="hp">🚗 Transport &amp; Driver Slips</span>
+    <span class="hp">🌙 Seasonal Pricing</span>
+    <span class="hp">🔒 Role-Based Access</span>
+  </div>
+</div>
+
+<!-- ══ SCREENSHOT 1 ══ -->
+<section>
+  <div class="lbl">Feature Highlight</div>
+  <h2>Real-Time Room <span>Status Overview</span></h2>
+  <p class="lead">See every room's status at a glance in a kanban board grouped by floor — Green: Vacant, Orange: Reserved, Red: Occupied — updated automatically as guests check in and out.</p>
+  <div class="ss">
+    <img src="/hotel_management/static/description/screenshots/01_room_overview.jpg" alt="Room Overview"/>
+    <p class="cap">Fig.1 — Room Overview Kanban: real-time status across all floors with color-coded badges</p>
+  </div>
+
+  <!-- ══ SCREENSHOT 2 ══ -->
+  <div class="ss">
+    <h3>Complete Booking Management</h3>
+    <p>All reservations in a clear list with status badges, guest details, dates, and totals. Full lifecycle: Draft → Confirmed → Checked In → Checked Out, with Cancel and No Show.</p>
+    <img src="/hotel_management/static/description/screenshots/02_bookings_list.jpg" alt="Bookings List"/>
+    <p class="cap">Fig.2 — Bookings list showing all status stages with guest details and totals</p>
+  </div>
+
+  <!-- ══ SCREENSHOT 3 ══ -->
+  <div class="ss">
+    <h3>Detailed Booking Form</h3>
+    <p>Guest info, assigned rooms with nightly rates, registered guests with ID documents, and full room change audit history. Smart buttons show linked folio, laundry, restaurant, and transport counts.</p>
+    <img src="/hotel_management/static/description/screenshots/03_booking_form.jpg" alt="Booking Form"/>
+    <p class="cap">Fig.3 — Booking form with smart buttons, guest documents, room lines, and change history</p>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ SCREENSHOT 4 ══ -->
+<section>
+  <div class="lbl">Billing &amp; Invoicing</div>
+  <h2>Automatic <span>Folio &amp; Invoice</span> Generation</h2>
+  <p class="lead">A folio is created automatically at check-in. Every laundry, restaurant, and transport charge syncs in real time. Generate a single invoice or split by room with one click.</p>
+  <div class="ss">
+    <img src="/hotel_management/static/description/screenshots/04_folio_invoice.jpg" alt="Folio Invoice"/>
+    <p class="cap">Fig.4 — Folio with charges grouped by category: Room, Laundry, Restaurant, Transport. Printable PDF invoice.</p>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ SCREENSHOT 5 ══ -->
+<section>
+  <div class="lbl">Ancillary Services</div>
+  <h2>Laundry &amp; <span>Restaurant</span> Services</h2>
+  <p class="lead">Laundry and restaurant staff work independently — creating orders without going through reception. All charges sync automatically to the guest folio.</p>
+  <div class="ss">
+    <img src="/hotel_management/static/description/screenshots/05_laundry_restaurant.jpg" alt="Laundry and Restaurant"/>
+    <p class="cap">Fig.5 — Laundry orders (left) and Restaurant orders (right) with full workflow tracking and itemized lines</p>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ SCREENSHOT 6 ══ -->
+<section>
+  <div class="lbl">Transportation</div>
+  <h2>Transport Scheduling &amp; <span>Driver Slips</span></h2>
+  <p class="lead">Schedule pickups, drops, and round trips with KM-based automatic charge calculation. Print professional driver slips with route, timing, and signature boxes — ready in seconds.</p>
+  <div class="ss">
+    <img src="/hotel_management/static/description/screenshots/06_transport_driver_slip.jpg" alt="Transport Driver Slip"/>
+    <p class="cap">Fig.6 — Transport request list (left) and printable Driver Trip Slip with route, KM charge, and signature blocks (right)</p>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ FEATURES GRID ══ -->
+<section>
+  <div class="lbl">Full Feature Set</div>
+  <h2>Everything Your Hotel <span>Needs</span></h2>
+  <p class="lead">Twelve core feature areas covering every aspect of hotel operations.</p>
+  <div class="grid">
+    <div class="card c1"><div class="icon">🏨</div><h4>Room &amp; Floor Configuration</h4><p>Configure floors, room types, capacities, base pricing, and image galleries. Facilities like WiFi, minibar, jacuzzi, and balcony assigned per room.</p></div>
+    <div class="card c2"><div class="icon">📅</div><h4>Full Booking Lifecycle</h4><p>Draft → Confirmed → Checked In → Checked Out with Cancel and No Show. Extend checkout with automatic charge recalculation.</p></div>
+    <div class="card c3"><div class="icon">🌙</div><h4>Seasonal Rate Pricing</h4><p>Define peak-season, festival, and custom date-range pricing that automatically overrides base rates during their effective period.</p></div>
+    <div class="card c2"><div class="icon">👥</div><h4>Guest &amp; Document Management</h4><p>Register all guests with ID document uploads. Track adults and children separately per booking.</p></div>
+    <div class="card c1"><div class="icon">🔄</div><h4>Room Change Audit Trail</h4><p>Move guests to different rooms with mandatory reason entry. Full change history preserved for every booking.</p></div>
+    <div class="card c3"><div class="icon">🧾</div><h4>Auto Folio &amp; Real-Time Sync</h4><p>Folio auto-created at check-in with room charges. Every service charge syncs instantly — no manual entry needed.</p></div>
+    <div class="card c4"><div class="icon">👕</div><h4>Laundry Workflow</h4><p>Confirmed → Pickup → In Process → Delivered. Laundry staff work independently. All charges sync to the folio automatically.</p></div>
+    <div class="card c6"><div class="icon">🍽️</div><h4>Restaurant &amp; Room Service</h4><p>Draft → Confirmed → In Preparation → Delivered workflow for smooth kitchen coordination.</p></div>
+    <div class="card c2"><div class="icon">🚗</div><h4>KM-Based Transport</h4><p>Pickup, drop, and round-trip scheduling with predefined locations. Distance-based automatic pricing.</p></div>
+    <div class="card c5"><div class="icon">⎙</div><h4>PDF Reports</h4><p>Printable hotel invoices with category sections, and driver slips with route details and signature blocks.</p></div>
+    <div class="card c1"><div class="icon">🏢</div><h4>Multi-Room Bookings</h4><p>Reserve multiple rooms under one booking. Room-wise charge breakdown for group and corporate guests.</p></div>
+    <div class="card c3"><div class="icon">🔒</div><h4>Role-Based Access</h4><p>Admin, Reception, Laundry, and Restaurant roles. Each user sees only the menus relevant to their work.</p></div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ WORKFLOW ══ -->
+<section>
+  <div class="flow">
+    <div class="lbl" style="color:#f4a022">Guest Journey</div>
+    <h2>Complete Guest Lifecycle</h2>
+    <p class="lead">From first inquiry to final invoice, every step tracked and automated inside Odoo.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Booking</h4><p>Record guest details, rooms, and dates.</p></div>
+      <div class="step"><div class="num">2</div><h4>Confirm</h4><p>Rooms set to Reserved. Arrival prepared.</p></div>
+      <div class="step"><div class="num">3</div><h4>Check-In</h4><p>Rooms Occupied. Folio auto-created.</p></div>
+      <div class="step"><div class="num">4</div><h4>Stay</h4><p>Services added, charges sync to folio.</p></div>
+      <div class="step"><div class="num">5</div><h4>Check-Out</h4><p>Rooms Vacant. Folio closed.</p></div>
+      <div class="step"><div class="num">6</div><h4>Invoice</h4><p>Print categorized PDF invoice.</p></div>
+      <div class="step"><div class="num">7</div><h4>Reports</h4><p>Driver slips and service records stored.</p></div>
+      <div class="step"><div class="num">8</div><h4>Compliance</h4><p>Guest IDs and change history auditable.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section>
+  <div class="lbl">Ancillary Services</div>
+  <h2>Three Integrated <span>Service Departments</span></h2>
+  <p class="lead">Each department operates independently — all connected to the central folio.</p>
+  <div class="svcs">
+    <div class="svc ldy">
+      <div class="svc-icon">👕</div>
+      <h4>Laundry Service</h4>
+      <p>Create, track, and deliver laundry orders for any room. Staff enter orders directly.</p>
+      <div class="stages"><span class="stg">Draft</span><span class="stg">Confirmed</span><span class="stg">Pickup</span><span class="stg">In Process</span><span class="stg">Delivered</span></div>
+    </div>
+    <div class="svc rst">
+      <div class="svc-icon">🍽️</div>
+      <h4>Restaurant &amp; Room Service</h4>
+      <p>Food and beverage orders for any room. Kitchen tracks from placement to delivery.</p>
+      <div class="stages"><span class="stg">Draft</span><span class="stg">Confirmed</span><span class="stg">In Preparation</span><span class="stg">Delivered</span></div>
+    </div>
+    <div class="svc trn">
+      <div class="svc-icon">🚗</div>
+      <h4>Transport &amp; Transfers</h4>
+      <p>Pickups, drops, and round trips. KM charges calculated automatically. Driver slips printed instantly.</p>
+      <div class="stages"><span class="stg">Draft</span><span class="stg">Confirmed</span><span class="stg">In Progress</span><span class="stg">Completed</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ ACCESS CONTROL ══ -->
+<section>
+  <div class="lbl">Security</div>
+  <h2>Role-Based <span>Access Control</span></h2>
+  <p class="lead">Four permission groups — each staff member sees only what they need.</p>
+  <table class="roles">
+    <thead><tr><th>Role</th><th>Menu Access</th><th>Permissions</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="rb rb-a">Admin / Manager</span></td>
+        <td>All menus including Configuration</td>
+        <td>Full CRUD on all records. Configure rooms, rates, document types, transport locations.</td>
+      </tr>
+      <tr>
+        <td><span class="rb rb-r">Reception</span></td>
+        <td>Bookings, Folios, Rooms, Transport</td>
+        <td>Create and manage bookings, check-in/out guests, manage folios, schedule transport.</td>
+      </tr>
+      <tr>
+        <td><span class="rb rb-l">Laundry Staff</span></td>
+        <td>Laundry Orders only</td>
+        <td>Create and process laundry orders independently. Read access to rooms and bookings.</td>
+      </tr>
+      <tr>
+        <td><span class="rb rb-rs">Restaurant Staff</span></td>
+        <td>Restaurant Orders only</td>
+        <td>Create and process food &amp; beverage orders independently. Read access to rooms and bookings.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="div"/>
+
+<!-- ══ TECH SPECS ══ -->
+<section>
+  <div class="lbl">Technical</div>
+  <h2>Built for <span>Odoo 19</span></h2>
+  <p class="lead">Engineered natively for Odoo 19 with clean architecture and no third-party dependencies.</p>
+  <div class="specs">
+    <div class="spec"><span class="spec-i">⚙️</span><div><h5>Odoo 19 Native</h5><p>Built with Odoo 19 APIs — list views, modern OWL framework, no deprecated calls</p></div></div>
+    <div class="spec"><span class="spec-i">📦</span><div><h5>Dependencies</h5><p>base, mail, product, uom, account — no third-party packages required</p></div></div>
+    <div class="spec"><span class="spec-i">🖨️</span><div><h5>PDF Reports</h5><p>Hotel Invoice PDF and Driver Trip Slip PDF — print-ready A4 professional layout</p></div></div>
+    <div class="spec"><span class="spec-i">🔢</span><div><h5>Auto Sequences</h5><p>BK/, FO/, LD/, RS/, TR/ with year prefix — e.g. BK/2026/0001</p></div></div>
+    <div class="spec"><span class="spec-i">🧵</span><div><h5>Chatter &amp; Activities</h5><p>All major models inherit mail.thread — full log of state changes and notes</p></div></div>
+    <div class="spec"><span class="spec-i">🏗️</span><div><h5>Models Included</h5><p>15 models: hotel.floor · hotel.room · hotel.booking · hotel.folio · hotel.laundry.order · hotel.restaurant.order · hotel.transport.request + supporting models</p></div></div>
+    <div class="spec"><span class="spec-i">🎭</span><div><h5>Demo Data</h5><p>12 rooms · 5 floors · 7 bookings · 4 laundry · 4 restaurant · 4 transport · 3 folios — ready on install</p></div></div>
+    <div class="spec"><span class="spec-i">🛡️</span><div><h5>Security</h5><p>4 RBAC groups with granular model-level access. Admins auto-assigned on install.</p></div></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section>
+  <div class="contact">
+    <h3>📞 Contact &amp; Support</h3>
+    <table>
+      <tr><td>Developer</td><td>leapai.ai</td></tr>
+      <tr><td>Website</td><td><a href="https://leapai.ai" style="color:#0d7377">https://leapai.ai</a></td></tr>
+      <tr><td>Support Email</td><td>abdzoro89@gmail.com</td></tr>
+      <tr><td>Maintainer</td><td>a.osman@bab.com.sa</td></tr>
+      <tr><td>Phone</td><td>+966 562 984 106 / +966 553 368 212</td></tr>
+      <tr><td>Post-Deploy Support</td><td>50 days free support included</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section>
+  <div class="cta">
+    <h2>Ready to Modernize Your Hotel Operations?</h2>
+    <p>Install Hotel Management and give your entire team a single connected platform.</p>
+    <div class="cta-p">
+      <span class="cp">✅ Installs in minutes</span>
+      <span class="cp">✅ Demo data included</span>
+      <span class="cp">✅ No extra dependencies</span>
+      <span class="cp">✅ Odoo 19 native</span>
+      <span class="cp">✅ 50 days free support</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

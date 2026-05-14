@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ================================================================
+         EXTRA FACILITIES
+    ================================================================ -->
+    <record id="demo_facility_minibar" model="hotel.room.facility">
+        <field name="name">Minibar</field>
+        <field name="icon">fa-glass</field>
+    </record>
+    <record id="demo_facility_safe" model="hotel.room.facility">
+        <field name="name">In-Room Safe</field>
+        <field name="icon">fa-lock</field>
+    </record>
+    <record id="demo_facility_bathtub" model="hotel.room.facility">
+        <field name="name">Bathtub</field>
+        <field name="icon">fa-bath</field>
+    </record>
+    <record id="demo_facility_coffee" model="hotel.room.facility">
+        <field name="name">Coffee Maker</field>
+        <field name="icon">fa-coffee</field>
+    </record>
+    <record id="demo_facility_balcony" model="hotel.room.facility">
+        <field name="name">Private Balcony</field>
+        <field name="icon">fa-sun-o</field>
+    </record>
+    <record id="demo_facility_jacuzzi" model="hotel.room.facility">
+        <field name="name">Jacuzzi</field>
+        <field name="icon">fa-tint</field>
+    </record>
+    <record id="demo_facility_gym" model="hotel.room.facility">
+        <field name="name">Gym Access</field>
+        <field name="icon">fa-heartbeat</field>
+    </record>
+    <record id="demo_facility_pool" model="hotel.room.facility">
+        <field name="name">Pool Access</field>
+        <field name="icon">fa-life-ring</field>
+    </record>
+
+    <!-- ================================================================
+         EXTRA FLOORS
+    ================================================================ -->
+    <record id="demo_floor_second" model="hotel.floor">
+        <field name="name">Second Floor</field>
+        <field name="sequence">3</field>
+        <field name="active">True</field>
+    </record>
+    <record id="demo_floor_third" model="hotel.floor">
+        <field name="name">Third Floor</field>
+        <field name="sequence">4</field>
+        <field name="active">True</field>
+    </record>
+    <record id="demo_floor_penthouse" model="hotel.floor">
+        <field name="name">Penthouse Level</field>
+        <field name="sequence">5</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ================================================================
+         EXTRA ROOM TYPES
+    ================================================================ -->
+    <record id="demo_room_type_single" model="hotel.room.type">
+        <field name="name">Single Room</field>
+        <field name="description">Cozy single room, perfect for solo business travellers</field>
+        <field name="capacity_adults">1</field>
+        <field name="capacity_children">0</field>
+        <field name="base_price">80.00</field>
+        <field name="active">True</field>
+    </record>
+    <record id="demo_room_type_family" model="hotel.room.type">
+        <field name="name">Family Suite</field>
+        <field name="description">Spacious family suite with two bedrooms and a living area</field>
+        <field name="capacity_adults">2</field>
+        <field name="capacity_children">3</field>
+        <field name="base_price">320.00</field>
+        <field name="active">True</field>
+    </record>
+    <record id="demo_room_type_presidential" model="hotel.room.type">
+        <field name="name">Presidential Suite</field>
+        <field name="description">The pinnacle of luxury — panoramic views, private butler, full amenities</field>
+        <field name="capacity_adults">4</field>
+        <field name="capacity_children">2</field>
+        <field name="base_price">800.00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ================================================================
+         SEASONAL RATES
+    ================================================================ -->
+    <record id="demo_seasonal_peak_standard" model="hotel.seasonal.rate">
+        <field name="name">Summer Peak — Standard Room</field>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="date_from">2026-06-01</field>
+        <field name="date_to">2026-08-31</field>
+        <field name="price_per_night">145.00</field>
+        <field name="description">Summer season premium pricing for standard rooms</field>
+    </record>
+    <record id="demo_seasonal_peak_deluxe" model="hotel.seasonal.rate">
+        <field name="name">Summer Peak — Deluxe Suite</field>
+        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="date_from">2026-06-01</field>
+        <field name="date_to">2026-08-31</field>
+        <field name="price_per_night">340.00</field>
+        <field name="description">Summer season premium pricing for deluxe suites</field>
+    </record>
+    <record id="demo_seasonal_new_year" model="hotel.seasonal.rate">
+        <field name="name">New Year Festival — Presidential Suite</field>
+        <field name="room_type_id" ref="demo_room_type_presidential"/>
+        <field name="date_from">2026-12-28</field>
+        <field name="date_to">2027-01-03</field>
+        <field name="price_per_night">1200.00</field>
+        <field name="description">New Year festive season special rate</field>
+    </record>
+
+    <!-- ================================================================
+         EXTRA TRANSPORT LOCATIONS
+    ================================================================ -->
+    <record id="demo_transport_city_center" model="hotel.transport.location">
+        <field name="name">City Centre</field>
+        <field name="address">Main Square, City Centre</field>
+        <field name="distance_km">5.0</field>
+        <field name="price_per_km">2.0</field>
+    </record>
+    <record id="demo_transport_shopping_mall" model="hotel.transport.location">
+        <field name="name">Grand Shopping Mall</field>
+        <field name="address">Mall Boulevard, North District</field>
+        <field name="distance_km">8.0</field>
+        <field name="price_per_km">2.0</field>
+    </record>
+    <record id="demo_transport_bus_terminal" model="hotel.transport.location">
+        <field name="name">Central Bus Terminal</field>
+        <field name="address">Bus Terminal Road, East District</field>
+        <field name="distance_km">12.0</field>
+        <field name="price_per_km">2.0</field>
+    </record>
+
+    <!-- ================================================================
+         ROOMS — Ground Floor
+    ================================================================ -->
+    <record id="demo_room_g101" model="hotel.room">
+        <field name="name">G101</field>
+        <field name="floor_id" ref="hotel_management.floor_ground"/>
+        <field name="room_type_id" ref="demo_room_type_single"/>
+        <field name="status">vacant</field>
+        <field name="description">Ground floor single room with garden view</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
+    </record>
+    <record id="demo_room_g102" model="hotel.room">
+        <field name="name">G102</field>
+        <field name="floor_id" ref="hotel_management.floor_ground"/>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="status">vacant</field>
+        <field name="description">Ground floor standard room with courtyard view</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee'))]"/>
+    </record>
+    <record id="demo_room_g103" model="hotel.room">
+        <field name="name">G103</field>
+        <field name="floor_id" ref="hotel_management.floor_ground"/>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="status">reserved</field>
+        <field name="description">Ground floor standard room, wheelchair accessible</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac'))]"/>
+    </record>
+
+    <!-- ================================================================
+         ROOMS — First Floor
+    ================================================================ -->
+    <record id="demo_room_101" model="hotel.room">
+        <field name="name">101</field>
+        <field name="floor_id" ref="hotel_management.floor_first"/>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="status">occupied</field>
+        <field name="description">First floor standard room with pool view</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_minibar'))]"/>
+    </record>
+    <record id="demo_room_102" model="hotel.room">
+        <field name="name">102</field>
+        <field name="floor_id" ref="hotel_management.floor_first"/>
+        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="status">occupied</field>
+        <field name="description">First floor deluxe suite with panoramic city view</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony'))]"/>
+    </record>
+    <record id="demo_room_103" model="hotel.room">
+        <field name="name">103</field>
+        <field name="floor_id" ref="hotel_management.floor_first"/>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="status">vacant</field>
+        <field name="description">First floor standard room with city view</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
+    </record>
+
+    <!-- ================================================================
+         ROOMS — Second Floor
+    ================================================================ -->
+    <record id="demo_room_201" model="hotel.room">
+        <field name="name">201</field>
+        <field name="floor_id" ref="demo_floor_second"/>
+        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="status">vacant</field>
+        <field name="description">Second floor deluxe suite with garden terrace</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_pool'))]"/>
+    </record>
+    <record id="demo_room_202" model="hotel.room">
+        <field name="name">202</field>
+        <field name="floor_id" ref="demo_floor_second"/>
+        <field name="room_type_id" ref="demo_room_type_family"/>
+        <field name="status">reserved</field>
+        <field name="description">Second floor family suite with two bedrooms and lounge area</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_gym'))]"/>
+    </record>
+    <record id="demo_room_203" model="hotel.room">
+        <field name="name">203</field>
+        <field name="floor_id" ref="demo_floor_second"/>
+        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="status">vacant</field>
+        <field name="description">Second floor standard room, quiet corner room</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe'))]"/>
+    </record>
+
+    <!-- ================================================================
+         ROOMS — Third Floor
+    ================================================================ -->
+    <record id="demo_room_301" model="hotel.room">
+        <field name="name">301</field>
+        <field name="floor_id" ref="demo_floor_third"/>
+        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="status">vacant</field>
+        <field name="description">Third floor deluxe suite with skyline view and private terrace</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi'))]"/>
+    </record>
+    <record id="demo_room_302" model="hotel.room">
+        <field name="name">302</field>
+        <field name="floor_id" ref="demo_floor_third"/>
+        <field name="room_type_id" ref="demo_room_type_family"/>
+        <field name="status">vacant</field>
+        <field name="description">Third floor family suite with skyline views from both bedrooms</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool'))]"/>
+    </record>
+
+    <!-- ================================================================
+         ROOMS — Penthouse
+    ================================================================ -->
+    <record id="demo_room_ph01" model="hotel.room">
+        <field name="name">PH01</field>
+        <field name="floor_id" ref="demo_floor_penthouse"/>
+        <field name="room_type_id" ref="demo_room_type_presidential"/>
+        <field name="status">vacant</field>
+        <field name="description">The Presidential Suite — 360° panoramic views, private dining room, butler service, full spa facilities</field>
+        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_coffee'))]"/>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 1 — DRAFT (Upcoming inquiry)
+    ================================================================ -->
+    <record id="demo_booking_draft" model="hotel.booking">
+        <field name="name">BK/2026/0001</field>
+        <field name="guest_name">Sarah Johnson</field>
+        <field name="phone">+1 212-555-0101</field>
+        <field name="email">sarah.johnson@example.com</field>
+        <field name="check_in">2026-06-01</field>
+        <field name="check_out">2026-06-05</field>
+        <field name="adults">2</field>
+        <field name="children">1</field>
+        <field name="state">draft</field>
+        <field name="notes">Guest requested high-floor room with city view. Celebrating anniversary — flowers in room requested.</field>
+    </record>
+    <record id="demo_booking_draft_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_draft"/>
+        <field name="room_id" ref="demo_room_201"/>
+        <field name="rate_per_night">250.00</field>
+        <field name="extra_person_count">1</field>
+        <field name="extra_person_charge">30.00</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 2 — CONFIRMED (Arriving soon)
+    ================================================================ -->
+    <record id="demo_booking_confirmed" model="hotel.booking">
+        <field name="name">BK/2026/0002</field>
+        <field name="guest_name">Ahmed Al-Rashidi</field>
+        <field name="phone">+971 50 234 5678</field>
+        <field name="email">ahmed.rashidi@example.com</field>
+        <field name="check_in">2026-05-16</field>
+        <field name="check_out">2026-05-21</field>
+        <field name="adults">2</field>
+        <field name="children">2</field>
+        <field name="state">confirm</field>
+        <field name="notes">VIP guest. Requires airport pickup on arrival. Halal meal preference for restaurant orders.</field>
+    </record>
+    <record id="demo_booking_confirmed_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_confirmed"/>
+        <field name="room_id" ref="demo_room_202"/>
+        <field name="rate_per_night">320.00</field>
+        <field name="extra_person_count">2</field>
+        <field name="extra_person_charge">25.00</field>
+    </record>
+    <record id="demo_booking_confirmed_guest1" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_confirmed"/>
+        <field name="room_id" ref="demo_room_202"/>
+        <field name="name">Ahmed Al-Rashidi</field>
+        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_number">AE123456789</field>
+    </record>
+    <record id="demo_booking_confirmed_guest2" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_confirmed"/>
+        <field name="room_id" ref="demo_room_202"/>
+        <field name="name">Fatima Al-Rashidi</field>
+        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_number">AE987654321</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 3 — CHECKED IN (Currently staying)
+    ================================================================ -->
+    <record id="demo_booking_checkin" model="hotel.booking">
+        <field name="name">BK/2026/0003</field>
+        <field name="guest_name">Emma &amp; James Williams</field>
+        <field name="phone">+44 7700 900123</field>
+        <field name="email">jwilliams@example.com</field>
+        <field name="check_in">2026-05-12</field>
+        <field name="check_out">2026-05-17</field>
+        <field name="adults">2</field>
+        <field name="children">0</field>
+        <field name="state">check_in</field>
+        <field name="notes">Honeymoon couple. Champagne on arrival already arranged.</field>
+    </record>
+    <record id="demo_booking_checkin_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="rate_per_night">250.00</field>
+        <field name="extra_person_count">0</field>
+        <field name="extra_person_charge">0.00</field>
+    </record>
+    <record id="demo_booking_checkin_guest1" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="name">James Williams</field>
+        <field name="document_type_id" ref="hotel_management.document_type_national_id"/>
+        <field name="document_number">GB-NI-990123</field>
+    </record>
+    <record id="demo_booking_checkin_guest2" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="name">Emma Williams</field>
+        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_number">GB654321098</field>
+    </record>
+
+    <!-- FOLIO for checked-in booking -->
+    <record id="demo_folio_checkin" model="hotel.folio">
+        <field name="name">FO/2026/0001</field>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="check_in">2026-05-12</field>
+        <field name="check_out">2026-05-17</field>
+        <field name="state">open</field>
+        <field name="notes">Honeymoon package — complimentary champagne and fruit basket provided on arrival.</field>
+    </record>
+    <!-- Link folio back to booking -->
+    <record id="demo_booking_checkin" model="hotel.booking">
+        <field name="folio_id" ref="demo_folio_checkin"/>
+    </record>
+
+    <!-- Folio Lines — Room Charges -->
+    <record id="demo_folio_line_room1" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="booking_room_id" ref="demo_booking_checkin_room1"/>
+        <field name="description">Room 102 (Deluxe Suite) — 5 nights @ 250.00/night</field>
+        <field name="category">room</field>
+        <field name="date">2026-05-12</field>
+        <field name="quantity">5</field>
+        <field name="unit_price">250.00</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 4 — CHECKED OUT (Past stay)
+    ================================================================ -->
+    <record id="demo_booking_checkout" model="hotel.booking">
+        <field name="name">BK/2026/0004</field>
+        <field name="guest_name">Carlos Mendoza</field>
+        <field name="phone">+52 55 1234 5678</field>
+        <field name="email">cmendoza@example.com</field>
+        <field name="check_in">2026-05-01</field>
+        <field name="check_out">2026-05-06</field>
+        <field name="adults">1</field>
+        <field name="children">0</field>
+        <field name="state">check_out</field>
+        <field name="notes">Business traveller. Requested early checkout receipt.</field>
+    </record>
+    <record id="demo_booking_checkout_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_checkout"/>
+        <field name="room_id" ref="demo_room_101"/>
+        <field name="rate_per_night">120.00</field>
+        <field name="extra_person_count">0</field>
+        <field name="extra_person_charge">0.00</field>
+    </record>
+
+    <!-- FOLIO for checked-out booking (closed) -->
+    <record id="demo_folio_checkout" model="hotel.folio">
+        <field name="name">FO/2026/0002</field>
+        <field name="booking_id" ref="demo_booking_checkout"/>
+        <field name="check_in">2026-05-01</field>
+        <field name="check_out">2026-05-06</field>
+        <field name="state">closed</field>
+    </record>
+    <record id="demo_booking_checkout" model="hotel.booking">
+        <field name="folio_id" ref="demo_folio_checkout"/>
+    </record>
+    <record id="demo_folio_line_checkout_room" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="description">Room 101 (Standard) — 5 nights @ 120.00/night</field>
+        <field name="category">room</field>
+        <field name="date">2026-05-01</field>
+        <field name="quantity">5</field>
+        <field name="unit_price">120.00</field>
+    </record>
+    <record id="demo_folio_line_checkout_restaurant" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="description">Restaurant Order RS/2026/0003 — Dinner for one</field>
+        <field name="category">restaurant</field>
+        <field name="date">2026-05-03</field>
+        <field name="quantity">1</field>
+        <field name="unit_price">62.00</field>
+        <field name="reference">RS/2026/0003</field>
+    </record>
+    <record id="demo_folio_line_checkout_laundry" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="description">Laundry Order LD/2026/0003 — Business shirts &amp; trousers</field>
+        <field name="category">laundry</field>
+        <field name="date">2026-05-04</field>
+        <field name="quantity">1</field>
+        <field name="unit_price">45.00</field>
+        <field name="reference">LD/2026/0003</field>
+    </record>
+    <record id="demo_folio_line_checkout_transport" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="description">Airport Drop — TR/2026/0003 — 25 KM @ 2.50/KM</field>
+        <field name="category">transport</field>
+        <field name="date">2026-05-06</field>
+        <field name="quantity">1</field>
+        <field name="unit_price">62.50</field>
+        <field name="reference">TR/2026/0003</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 5 — CANCELLED
+    ================================================================ -->
+    <record id="demo_booking_cancelled" model="hotel.booking">
+        <field name="name">BK/2026/0005</field>
+        <field name="guest_name">Priya Sharma</field>
+        <field name="phone">+91 98765 43210</field>
+        <field name="email">priya.sharma@example.com</field>
+        <field name="check_in">2026-05-10</field>
+        <field name="check_out">2026-05-13</field>
+        <field name="adults">2</field>
+        <field name="children">1</field>
+        <field name="state">cancel</field>
+        <field name="notes">Cancelled due to change in travel plans. Refund processed.</field>
+    </record>
+    <record id="demo_booking_cancelled_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_cancelled"/>
+        <field name="room_id" ref="demo_room_203"/>
+        <field name="rate_per_night">120.00</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 6 — NO SHOW
+    ================================================================ -->
+    <record id="demo_booking_noshow" model="hotel.booking">
+        <field name="name">BK/2026/0006</field>
+        <field name="guest_name">Robert Klein</field>
+        <field name="phone">+49 30 1234 5678</field>
+        <field name="email">r.klein@example.com</field>
+        <field name="check_in">2026-05-08</field>
+        <field name="check_out">2026-05-10</field>
+        <field name="adults">1</field>
+        <field name="children">0</field>
+        <field name="state">no_show</field>
+        <field name="notes">Guest did not arrive. Phone calls unanswered. No-show fee applied per policy.</field>
+    </record>
+    <record id="demo_booking_noshow_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_noshow"/>
+        <field name="room_id" ref="demo_room_g101"/>
+        <field name="rate_per_night">80.00</field>
+    </record>
+
+    <!-- ================================================================
+         BOOKING 7 — CHECKED IN with 2 rooms
+    ================================================================ -->
+    <record id="demo_booking_multiroom" model="hotel.booking">
+        <field name="name">BK/2026/0007</field>
+        <field name="guest_name">Chen Wei — Corporate Group</field>
+        <field name="phone">+86 10 5678 1234</field>
+        <field name="email">cwei@corporatetravel.cn</field>
+        <field name="check_in">2026-05-13</field>
+        <field name="check_out">2026-05-16</field>
+        <field name="adults">4</field>
+        <field name="children">0</field>
+        <field name="state">check_in</field>
+        <field name="notes">Corporate booking — 4 executives. Breakfast included. Invoice to company account.</field>
+    </record>
+    <record id="demo_booking_multiroom_room1" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="room_id" ref="demo_room_g102"/>
+        <field name="rate_per_night">120.00</field>
+    </record>
+    <record id="demo_booking_multiroom_room2" model="hotel.booking.room">
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="room_id" ref="demo_room_g103"/>
+        <field name="rate_per_night">120.00</field>
+    </record>
+    <record id="demo_booking_multiroom_guest1" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="room_id" ref="demo_room_g102"/>
+        <field name="name">Chen Wei</field>
+        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_number">CN-G12345678</field>
+    </record>
+    <record id="demo_booking_multiroom_guest2" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="room_id" ref="demo_room_g102"/>
+        <field name="name">Liu Yang</field>
+        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_number">CN-H98765432</field>
+    </record>
+    <record id="demo_booking_multiroom_guest3" model="hotel.booking.guest">
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="room_id" ref="demo_room_g103"/>
+        <field name="name">Zhang Lei</field>
+        <field name="document_type_id" ref="hotel_management.document_type_national_id"/>
+        <field name="document_number">CN-NID-44556677</field>
+    </record>
+
+    <!-- FOLIO for multi-room corporate booking -->
+    <record id="demo_folio_multiroom" model="hotel.folio">
+        <field name="name">FO/2026/0003</field>
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="check_in">2026-05-13</field>
+        <field name="check_out">2026-05-16</field>
+        <field name="state">open</field>
+        <field name="notes">Corporate account — invoice to be sent to Chen Wei Corp Ltd.</field>
+    </record>
+    <record id="demo_booking_multiroom" model="hotel.booking">
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+    </record>
+    <record id="demo_folio_line_multiroom_r1" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+        <field name="booking_room_id" ref="demo_booking_multiroom_room1"/>
+        <field name="description">Room G102 (Standard) — 3 nights @ 120.00/night</field>
+        <field name="category">room</field>
+        <field name="date">2026-05-13</field>
+        <field name="quantity">3</field>
+        <field name="unit_price">120.00</field>
+    </record>
+    <record id="demo_folio_line_multiroom_r2" model="hotel.folio.line">
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+        <field name="booking_room_id" ref="demo_booking_multiroom_room2"/>
+        <field name="description">Room G103 (Standard) — 3 nights @ 120.00/night</field>
+        <field name="category">room</field>
+        <field name="date">2026-05-13</field>
+        <field name="quantity">3</field>
+        <field name="unit_price">120.00</field>
+    </record>
+
+    <!-- ================================================================
+         LAUNDRY ORDERS
+    ================================================================ -->
+    <!-- Laundry 1: Delivered (linked to checked-out folio) -->
+    <record id="demo_laundry_delivered" model="hotel.laundry.order">
+        <field name="name">LD/2026/0001</field>
+        <field name="booking_id" ref="demo_booking_checkout"/>
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="room_id" ref="demo_room_101"/>
+        <field name="state">deliver</field>
+        <field name="date">2026-05-04</field>
+        <field name="notes">Express service requested. Returned within 4 hours.</field>
+    </record>
+    <record id="demo_laundry_delivered_line1" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_delivered"/>
+        <field name="item_name">Business Shirts</field>
+        <field name="quantity">3</field>
+        <field name="price_unit">8.00</field>
+    </record>
+    <record id="demo_laundry_delivered_line2" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_delivered"/>
+        <field name="item_name">Dress Trousers</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">10.50</field>
+    </record>
+    <record id="demo_laundry_delivered_line3" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_delivered"/>
+        <field name="item_name">Suit Jacket</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">15.00</field>
+    </record>
+
+    <!-- Laundry 2: In Process (for current guest) -->
+    <record id="demo_laundry_in_process" model="hotel.laundry.order">
+        <field name="name">LD/2026/0002</field>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="state">in_process</field>
+        <field name="date">2026-05-14</field>
+        <field name="notes">Honeymoon couple — handle with care. Return by 6pm.</field>
+    </record>
+    <record id="demo_laundry_in_process_line1" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_in_process"/>
+        <field name="item_name">Evening Gown</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">22.00</field>
+    </record>
+    <record id="demo_laundry_in_process_line2" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_in_process"/>
+        <field name="item_name">Dress Shirts</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">8.00</field>
+    </record>
+    <record id="demo_laundry_in_process_line3" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_in_process"/>
+        <field name="item_name">Silk Scarves</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">12.00</field>
+    </record>
+
+    <!-- Laundry 3: Confirmed (just placed by corporate guest) -->
+    <record id="demo_laundry_confirmed" model="hotel.laundry.order">
+        <field name="name">LD/2026/0003</field>
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+        <field name="room_id" ref="demo_room_g102"/>
+        <field name="state">confirm</field>
+        <field name="date">2026-05-14</field>
+        <field name="notes">4 corporate suits — next-day service.</field>
+    </record>
+    <record id="demo_laundry_confirmed_line1" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_confirmed"/>
+        <field name="item_name">Corporate Suits</field>
+        <field name="quantity">4</field>
+        <field name="price_unit">18.00</field>
+    </record>
+    <record id="demo_laundry_confirmed_line2" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_confirmed"/>
+        <field name="item_name">Dress Shirts</field>
+        <field name="quantity">6</field>
+        <field name="price_unit">8.00</field>
+    </record>
+
+    <!-- Laundry 4: Draft (new request) -->
+    <record id="demo_laundry_draft" model="hotel.laundry.order">
+        <field name="name">LD/2026/0004</field>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="state">draft</field>
+        <field name="date">2026-05-14</field>
+        <field name="notes">Casual wear — no rush, next morning is fine.</field>
+    </record>
+    <record id="demo_laundry_draft_line1" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_draft"/>
+        <field name="item_name">Casual T-Shirts</field>
+        <field name="quantity">3</field>
+        <field name="price_unit">6.00</field>
+    </record>
+    <record id="demo_laundry_draft_line2" model="hotel.laundry.order.line">
+        <field name="order_id" ref="demo_laundry_draft"/>
+        <field name="item_name">Jeans</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">9.00</field>
+    </record>
+
+    <!-- ================================================================
+         RESTAURANT ORDERS
+    ================================================================ -->
+    <!-- Restaurant 1: Delivered (past guest) -->
+    <record id="demo_restaurant_delivered" model="hotel.restaurant.order">
+        <field name="name">RS/2026/0001</field>
+        <field name="booking_id" ref="demo_booking_checkout"/>
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="room_id" ref="demo_room_101"/>
+        <field name="state">delivered</field>
+        <field name="order_date">2026-05-03 19:30:00</field>
+        <field name="notes">Guest requested no onions. Delivered on time.</field>
+    </record>
+    <record id="demo_restaurant_delivered_line1" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_delivered"/>
+        <field name="product_name">Grilled Salmon with Vegetables</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">28.00</field>
+    </record>
+    <record id="demo_restaurant_delivered_line2" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_delivered"/>
+        <field name="product_name">Caesar Salad</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">14.00</field>
+    </record>
+    <record id="demo_restaurant_delivered_line3" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_delivered"/>
+        <field name="product_name">Mineral Water (1L)</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">5.00</field>
+    </record>
+    <record id="demo_restaurant_delivered_line4" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_delivered"/>
+        <field name="product_name">Chocolate Fondant Dessert</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">10.00</field>
+    </record>
+
+    <!-- Restaurant 2: In Preparation (current honeymoon guest) -->
+    <record id="demo_restaurant_in_prep" model="hotel.restaurant.order">
+        <field name="name">RS/2026/0002</field>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="state">in_preparation</field>
+        <field name="order_date">2026-05-14 12:15:00</field>
+        <field name="notes">Romantic lunch for two. Candles requested. Complimentary strawberries from hotel.</field>
+    </record>
+    <record id="demo_restaurant_in_prep_line1" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_in_prep"/>
+        <field name="product_name">Lobster Thermidor</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">55.00</field>
+    </record>
+    <record id="demo_restaurant_in_prep_line2" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_in_prep"/>
+        <field name="product_name">Mixed Garden Salad</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">12.00</field>
+    </record>
+    <record id="demo_restaurant_in_prep_line3" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_in_prep"/>
+        <field name="product_name">Sparkling Champagne (Bottle)</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">75.00</field>
+    </record>
+    <record id="demo_restaurant_in_prep_line4" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_in_prep"/>
+        <field name="product_name">Crème Brûlée</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">14.00</field>
+    </record>
+
+    <!-- Restaurant 3: Confirmed (corporate group) -->
+    <record id="demo_restaurant_confirmed" model="hotel.restaurant.order">
+        <field name="name">RS/2026/0003</field>
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+        <field name="room_id" ref="demo_room_g102"/>
+        <field name="state">confirmed</field>
+        <field name="order_date">2026-05-14 07:30:00</field>
+        <field name="notes">Business breakfast for 4 — delivered to room G102 by 8am.</field>
+    </record>
+    <record id="demo_restaurant_confirmed_line1" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_confirmed"/>
+        <field name="product_name">Full English Breakfast</field>
+        <field name="quantity">4</field>
+        <field name="price_unit">18.00</field>
+    </record>
+    <record id="demo_restaurant_confirmed_line2" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_confirmed"/>
+        <field name="product_name">Fresh Orange Juice</field>
+        <field name="quantity">4</field>
+        <field name="price_unit">6.00</field>
+    </record>
+    <record id="demo_restaurant_confirmed_line3" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_confirmed"/>
+        <field name="product_name">Pot of Coffee</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">9.00</field>
+    </record>
+
+    <!-- Restaurant 4: Draft (new order) -->
+    <record id="demo_restaurant_draft" model="hotel.restaurant.order">
+        <field name="name">RS/2026/0004</field>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="room_id" ref="demo_room_102"/>
+        <field name="state">draft</field>
+        <field name="order_date">2026-05-14 20:00:00</field>
+        <field name="notes">Dinner for two — candlelight setup requested.</field>
+    </record>
+    <record id="demo_restaurant_draft_line1" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_draft"/>
+        <field name="product_name">Beef Tenderloin</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">42.00</field>
+    </record>
+    <record id="demo_restaurant_draft_line2" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_draft"/>
+        <field name="product_name">Tiramisu</field>
+        <field name="quantity">2</field>
+        <field name="price_unit">12.00</field>
+    </record>
+    <record id="demo_restaurant_draft_line3" model="hotel.restaurant.order.line">
+        <field name="order_id" ref="demo_restaurant_draft"/>
+        <field name="product_name">House Red Wine (Bottle)</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">38.00</field>
+    </record>
+
+    <!-- ================================================================
+         TRANSPORT REQUESTS
+    ================================================================ -->
+    <!-- Transport 1: Completed — airport drop (past guest) -->
+    <record id="demo_transport_completed" model="hotel.transport.request">
+        <field name="name">TR/2026/0001</field>
+        <field name="booking_id" ref="demo_booking_checkout"/>
+        <field name="folio_id" ref="demo_folio_checkout"/>
+        <field name="guest_name">Carlos Mendoza</field>
+        <field name="phone">+52 55 1234 5678</field>
+        <field name="trip_type">drop</field>
+        <field name="drop_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="pickup_datetime">2026-05-06 09:00:00</field>
+        <field name="vehicle_type">car</field>
+        <field name="driver_name">Mohammed Hassan</field>
+        <field name="driver_phone">+966 50 111 2222</field>
+        <field name="state">completed</field>
+        <field name="notes">Early morning airport drop. Flight at 11:30am. Guest requested 2 hours before departure.</field>
+    </record>
+
+    <!-- Transport 2: Confirmed — airport pickup for upcoming guest -->
+    <record id="demo_transport_confirmed" model="hotel.transport.request">
+        <field name="name">TR/2026/0002</field>
+        <field name="booking_id" ref="demo_booking_confirmed"/>
+        <field name="guest_name">Ahmed Al-Rashidi</field>
+        <field name="phone">+971 50 234 5678</field>
+        <field name="trip_type">pickup</field>
+        <field name="pickup_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="pickup_datetime">2026-05-16 14:30:00</field>
+        <field name="vehicle_type">van</field>
+        <field name="driver_name">David Okonkwo</field>
+        <field name="driver_phone">+966 55 333 4444</field>
+        <field name="state">confirmed</field>
+        <field name="notes">VIP family — 2 adults, 2 children, 6 pieces of luggage. Van required. Welcome sign requested.</field>
+    </record>
+
+    <!-- Transport 3: In Progress — city tour for honeymoon couple -->
+    <record id="demo_transport_in_progress" model="hotel.transport.request">
+        <field name="name">TR/2026/0003</field>
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="folio_id" ref="demo_folio_checkin"/>
+        <field name="guest_name">Emma &amp; James Williams</field>
+        <field name="phone">+44 7700 900123</field>
+        <field name="trip_type">round</field>
+        <field name="pickup_location_id" ref="demo_transport_city_center"/>
+        <field name="drop_location_id" ref="demo_transport_shopping_mall"/>
+        <field name="pickup_datetime">2026-05-14 10:00:00</field>
+        <field name="vehicle_type">luxury</field>
+        <field name="driver_name">James Kariuki</field>
+        <field name="driver_phone">+966 55 777 8888</field>
+        <field name="state">in_progress</field>
+        <field name="notes">Honeymoon couple — city tour and shopping. Luxury car. Return by 3pm.</field>
+    </record>
+
+    <!-- Transport 4: Draft — corporate airport drop -->
+    <record id="demo_transport_draft" model="hotel.transport.request">
+        <field name="name">TR/2026/0004</field>
+        <field name="booking_id" ref="demo_booking_multiroom"/>
+        <field name="folio_id" ref="demo_folio_multiroom"/>
+        <field name="guest_name">Chen Wei — Corporate Group</field>
+        <field name="phone">+86 10 5678 1234</field>
+        <field name="trip_type">drop</field>
+        <field name="drop_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="pickup_datetime">2026-05-16 06:00:00</field>
+        <field name="vehicle_type">van</field>
+        <field name="state">draft</field>
+        <field name="notes">4 executives — early morning flight. Van with luggage space. Confirm driver by evening of May 15.</field>
+    </record>
+
+    <!-- ================================================================
+         ROOM CHANGE HISTORY (for checked-in honeymoon couple)
+    ================================================================ -->
+    <record id="demo_room_change_1" model="hotel.booking.room.change">
+        <field name="booking_id" ref="demo_booking_checkin"/>
+        <field name="room_from_id" ref="demo_room_103"/>
+        <field name="room_to_id" ref="demo_room_102"/>
+        <field name="change_date">2026-05-12 15:30:00</field>
+        <field name="reason">Guest upgraded to Deluxe Suite upon check-in as a honeymoon surprise. Original room 103 was standard. Upgrade provided at promotional rate.</field>
+    </record>
+
+</data>
+</odoo>
