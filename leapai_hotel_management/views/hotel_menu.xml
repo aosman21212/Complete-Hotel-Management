@@ -5,132 +5,132 @@
     <menuitem id="menu_hotel_root"
               name="Hotel"
               sequence="50"
-              web_icon="hotel_management,static/description/icon.png"/>
+              web_icon="leapai_hotel_management,static/description/icon.png"/>
 
     <!-- ==================== RECEPTION ==================== -->
     <menuitem id="menu_hotel_reception"
               name="Reception"
               parent="menu_hotel_root"
               sequence="10"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <menuitem id="menu_hotel_bookings"
               name="Bookings"
               parent="menu_hotel_reception"
               action="action_hotel_booking"
               sequence="10"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <menuitem id="menu_hotel_folios"
               name="Folios"
               parent="menu_hotel_reception"
               action="action_hotel_folio"
               sequence="20"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <menuitem id="menu_hotel_rooms_overview"
               name="Rooms"
               parent="menu_hotel_reception"
               action="action_hotel_room"
               sequence="30"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <!-- ==================== LAUNDRY ==================== -->
     <menuitem id="menu_hotel_laundry"
               name="Laundry"
               parent="menu_hotel_root"
               sequence="20"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_laundry"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_laundry"/>
 
     <menuitem id="menu_hotel_laundry_orders"
               name="Laundry Orders"
               parent="menu_hotel_laundry"
               action="action_hotel_laundry_order"
               sequence="10"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_laundry"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_laundry"/>
 
     <!-- ==================== RESTAURANT ==================== -->
     <menuitem id="menu_hotel_restaurant"
               name="Restaurant"
               parent="menu_hotel_root"
               sequence="30"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_restaurant"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_restaurant"/>
 
     <menuitem id="menu_hotel_restaurant_orders"
               name="Restaurant Orders"
               parent="menu_hotel_restaurant"
               action="action_hotel_restaurant_order"
               sequence="10"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_restaurant"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_restaurant"/>
 
     <!-- ==================== TRANSPORT ==================== -->
     <menuitem id="menu_hotel_transport"
               name="Transport"
               parent="menu_hotel_root"
               sequence="40"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <menuitem id="menu_hotel_transport_requests"
               name="Transport Requests"
               parent="menu_hotel_transport"
               action="action_hotel_transport_request"
               sequence="10"
-              groups="hotel_management.group_hotel_admin,hotel_management.group_hotel_reception"/>
+              groups="leapai_hotel_management.group_hotel_admin,leapai_hotel_management.group_hotel_reception"/>
 
     <menuitem id="menu_hotel_transport_locations"
               name="Locations"
               parent="menu_hotel_transport"
               action="action_hotel_transport_location"
               sequence="20"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <!-- ==================== CONFIGURATION ==================== -->
     <menuitem id="menu_hotel_config"
               name="Configuration"
               parent="menu_hotel_root"
               sequence="100"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_floors"
               name="Floors"
               parent="menu_hotel_config"
               action="action_hotel_floor"
               sequence="10"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_room_types"
               name="Room Types"
               parent="menu_hotel_config"
               action="action_hotel_room_type"
               sequence="20"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_rooms"
               name="Rooms"
               parent="menu_hotel_config"
               action="action_hotel_room"
               sequence="30"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_facilities"
               name="Facilities"
               parent="menu_hotel_config"
               action="action_hotel_room_facility"
               sequence="40"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_document_types"
               name="Document Types"
               parent="menu_hotel_config"
               action="action_hotel_document_type"
               sequence="50"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
     <menuitem id="menu_hotel_config_seasonal_rates"
               name="Seasonal Rates"
               parent="menu_hotel_config"
               action="action_hotel_seasonal_rate"
               sequence="60"
-              groups="hotel_management.group_hotel_admin"/>
+              groups="leapai_hotel_management.group_hotel_admin"/>
 
 </odoo>

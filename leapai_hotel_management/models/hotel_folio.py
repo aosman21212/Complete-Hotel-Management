@@ -59,7 +59,7 @@ class HotelFolio(models.Model):
         return True
 
     def action_print_invoice(self):
-        return self.env.ref('hotel_management.action_report_hotel_invoice').report_action(self)
+        return self.env.ref('leapai_hotel_management.action_report_hotel_invoice').report_action(self)
 
 
 class HotelFolioLine(models.Model):
