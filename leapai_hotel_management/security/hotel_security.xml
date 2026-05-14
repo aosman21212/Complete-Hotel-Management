@@ -3,7 +3,7 @@
     <data noupdate="1">
 
         <!-- Hotel Management Module Category -->
-        <record id="module_hotel_management" model="ir.module.category">
+        <record id="module_leapai_hotel_management" model="ir.module.category">
             <field name="name">Hotel Management</field>
             <field name="sequence">50</field>
         </record>

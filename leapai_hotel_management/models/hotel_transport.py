@@ -146,4 +146,4 @@ class HotelTransportRequest(models.Model):
         return labels.get(self.trip_type, '')
 
     def action_print_driver_slip(self):
-        return self.env.ref('hotel_management.action_report_driver_slip').report_action(self)
+        return self.env.ref('leapai_hotel_management.action_report_driver_slip').report_action(self)

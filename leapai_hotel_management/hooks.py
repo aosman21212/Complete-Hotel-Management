@@ -15,7 +15,7 @@ def post_init_hook(env):
         ) g_sys
         JOIN ir_model_data imd2 ON imd2.res_id = g_hotel.id
             AND imd2.model = 'res.groups'
-            AND imd2.module = 'hotel_management'
+            AND imd2.module = 'leapai_hotel_management'
             AND imd2.name = 'group_hotel_admin'
         ON CONFLICT DO NOTHING
     """)

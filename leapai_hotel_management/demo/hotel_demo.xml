@@ -90,7 +90,7 @@
     ================================================================ -->
     <record id="demo_seasonal_peak_standard" model="hotel.seasonal.rate">
         <field name="name">Summer Peak — Standard Room</field>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="date_from">2026-06-01</field>
         <field name="date_to">2026-08-31</field>
         <field name="price_per_night">145.00</field>
@@ -98,7 +98,7 @@
     </record>
     <record id="demo_seasonal_peak_deluxe" model="hotel.seasonal.rate">
         <field name="name">Summer Peak — Deluxe Suite</field>
-        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_deluxe"/>
         <field name="date_from">2026-06-01</field>
         <field name="date_to">2026-08-31</field>
         <field name="price_per_night">340.00</field>
@@ -140,27 +140,27 @@
     ================================================================ -->
     <record id="demo_room_g101" model="hotel.room">
         <field name="name">G101</field>
-        <field name="floor_id" ref="hotel_management.floor_ground"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_ground"/>
         <field name="room_type_id" ref="demo_room_type_single"/>
         <field name="status">vacant</field>
         <field name="description">Ground floor single room with garden view</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
     </record>
     <record id="demo_room_g102" model="hotel.room">
         <field name="name">G102</field>
-        <field name="floor_id" ref="hotel_management.floor_ground"/>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_ground"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="status">vacant</field>
         <field name="description">Ground floor standard room with courtyard view</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee'))]"/>
     </record>
     <record id="demo_room_g103" model="hotel.room">
         <field name="name">G103</field>
-        <field name="floor_id" ref="hotel_management.floor_ground"/>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_ground"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="status">reserved</field>
         <field name="description">Ground floor standard room, wheelchair accessible</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac'))]"/>
     </record>
 
     <!-- ================================================================
@@ -168,27 +168,27 @@
     ================================================================ -->
     <record id="demo_room_101" model="hotel.room">
         <field name="name">101</field>
-        <field name="floor_id" ref="hotel_management.floor_first"/>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_first"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="status">occupied</field>
         <field name="description">First floor standard room with pool view</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_minibar'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_minibar'))]"/>
     </record>
     <record id="demo_room_102" model="hotel.room">
         <field name="name">102</field>
-        <field name="floor_id" ref="hotel_management.floor_first"/>
-        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_first"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_deluxe"/>
         <field name="status">occupied</field>
         <field name="description">First floor deluxe suite with panoramic city view</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony'))]"/>
     </record>
     <record id="demo_room_103" model="hotel.room">
         <field name="name">103</field>
-        <field name="floor_id" ref="hotel_management.floor_first"/>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="floor_id" ref="leapai_hotel_management.floor_first"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="status">vacant</field>
         <field name="description">First floor standard room with city view</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_coffee'))]"/>
     </record>
 
     <!-- ================================================================
@@ -197,10 +197,10 @@
     <record id="demo_room_201" model="hotel.room">
         <field name="name">201</field>
         <field name="floor_id" ref="demo_floor_second"/>
-        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_deluxe"/>
         <field name="status">vacant</field>
         <field name="description">Second floor deluxe suite with garden terrace</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_pool'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_pool'))]"/>
     </record>
     <record id="demo_room_202" model="hotel.room">
         <field name="name">202</field>
@@ -208,15 +208,15 @@
         <field name="room_type_id" ref="demo_room_type_family"/>
         <field name="status">reserved</field>
         <field name="description">Second floor family suite with two bedrooms and lounge area</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_gym'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_gym'))]"/>
     </record>
     <record id="demo_room_203" model="hotel.room">
         <field name="name">203</field>
         <field name="floor_id" ref="demo_floor_second"/>
-        <field name="room_type_id" ref="hotel_management.room_type_standard"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_standard"/>
         <field name="status">vacant</field>
         <field name="description">Second floor standard room, quiet corner room</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_safe'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_safe'))]"/>
     </record>
 
     <!-- ================================================================
@@ -225,10 +225,10 @@
     <record id="demo_room_301" model="hotel.room">
         <field name="name">301</field>
         <field name="floor_id" ref="demo_floor_third"/>
-        <field name="room_type_id" ref="hotel_management.room_type_deluxe"/>
+        <field name="room_type_id" ref="leapai_hotel_management.room_type_deluxe"/>
         <field name="status">vacant</field>
         <field name="description">Third floor deluxe suite with skyline view and private terrace</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi'))]"/>
     </record>
     <record id="demo_room_302" model="hotel.room">
         <field name="name">302</field>
@@ -236,7 +236,7 @@
         <field name="room_type_id" ref="demo_room_type_family"/>
         <field name="status">vacant</field>
         <field name="description">Third floor family suite with skyline views from both bedrooms</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_coffee')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool'))]"/>
     </record>
 
     <!-- ================================================================
@@ -248,7 +248,7 @@
         <field name="room_type_id" ref="demo_room_type_presidential"/>
         <field name="status">vacant</field>
         <field name="description">The Presidential Suite — 360° panoramic views, private dining room, butler service, full spa facilities</field>
-        <field name="facility_ids" eval="[(4, ref('hotel_management.facility_wifi')), (4, ref('hotel_management.facility_tv')), (4, ref('hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_coffee'))]"/>
+        <field name="facility_ids" eval="[(4, ref('leapai_hotel_management.facility_wifi')), (4, ref('leapai_hotel_management.facility_tv')), (4, ref('leapai_hotel_management.facility_ac')), (4, ref('demo_facility_minibar')), (4, ref('demo_facility_safe')), (4, ref('demo_facility_bathtub')), (4, ref('demo_facility_balcony')), (4, ref('demo_facility_jacuzzi')), (4, ref('demo_facility_gym')), (4, ref('demo_facility_pool')), (4, ref('demo_facility_coffee'))]"/>
     </record>
 
     <!-- ================================================================
@@ -300,14 +300,14 @@
         <field name="booking_id" ref="demo_booking_confirmed"/>
         <field name="room_id" ref="demo_room_202"/>
         <field name="name">Ahmed Al-Rashidi</field>
-        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_passport"/>
         <field name="document_number">AE123456789</field>
     </record>
     <record id="demo_booking_confirmed_guest2" model="hotel.booking.guest">
         <field name="booking_id" ref="demo_booking_confirmed"/>
         <field name="room_id" ref="demo_room_202"/>
         <field name="name">Fatima Al-Rashidi</field>
-        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_passport"/>
         <field name="document_number">AE987654321</field>
     </record>
 
@@ -337,14 +337,14 @@
         <field name="booking_id" ref="demo_booking_checkin"/>
         <field name="room_id" ref="demo_room_102"/>
         <field name="name">James Williams</field>
-        <field name="document_type_id" ref="hotel_management.document_type_national_id"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_national_id"/>
         <field name="document_number">GB-NI-990123</field>
     </record>
     <record id="demo_booking_checkin_guest2" model="hotel.booking.guest">
         <field name="booking_id" ref="demo_booking_checkin"/>
         <field name="room_id" ref="demo_room_102"/>
         <field name="name">Emma Williams</field>
-        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_passport"/>
         <field name="document_number">GB654321098</field>
     </record>
 
@@ -514,21 +514,21 @@
         <field name="booking_id" ref="demo_booking_multiroom"/>
         <field name="room_id" ref="demo_room_g102"/>
         <field name="name">Chen Wei</field>
-        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_passport"/>
         <field name="document_number">CN-G12345678</field>
     </record>
     <record id="demo_booking_multiroom_guest2" model="hotel.booking.guest">
         <field name="booking_id" ref="demo_booking_multiroom"/>
         <field name="room_id" ref="demo_room_g102"/>
         <field name="name">Liu Yang</field>
-        <field name="document_type_id" ref="hotel_management.document_type_passport"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_passport"/>
         <field name="document_number">CN-H98765432</field>
     </record>
     <record id="demo_booking_multiroom_guest3" model="hotel.booking.guest">
         <field name="booking_id" ref="demo_booking_multiroom"/>
         <field name="room_id" ref="demo_room_g103"/>
         <field name="name">Zhang Lei</field>
-        <field name="document_type_id" ref="hotel_management.document_type_national_id"/>
+        <field name="document_type_id" ref="leapai_hotel_management.document_type_national_id"/>
         <field name="document_number">CN-NID-44556677</field>
     </record>
 
@@ -812,7 +812,7 @@
         <field name="guest_name">Carlos Mendoza</field>
         <field name="phone">+52 55 1234 5678</field>
         <field name="trip_type">drop</field>
-        <field name="drop_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="drop_location_id" ref="leapai_hotel_management.transport_location_airport"/>
         <field name="pickup_datetime">2026-05-06 09:00:00</field>
         <field name="vehicle_type">car</field>
         <field name="driver_name">Mohammed Hassan</field>
@@ -828,7 +828,7 @@
         <field name="guest_name">Ahmed Al-Rashidi</field>
         <field name="phone">+971 50 234 5678</field>
         <field name="trip_type">pickup</field>
-        <field name="pickup_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="pickup_location_id" ref="leapai_hotel_management.transport_location_airport"/>
         <field name="pickup_datetime">2026-05-16 14:30:00</field>
         <field name="vehicle_type">van</field>
         <field name="driver_name">David Okonkwo</field>
@@ -863,7 +863,7 @@
         <field name="guest_name">Chen Wei — Corporate Group</field>
         <field name="phone">+86 10 5678 1234</field>
         <field name="trip_type">drop</field>
-        <field name="drop_location_id" ref="hotel_management.transport_location_airport"/>
+        <field name="drop_location_id" ref="leapai_hotel_management.transport_location_airport"/>
         <field name="pickup_datetime">2026-05-16 06:00:00</field>
         <field name="vehicle_type">van</field>
         <field name="state">draft</field>
