@@ -18,14 +18,18 @@ A comprehensive hotel management module covering:
 - Role-based access: Admin, Reception, Laundry, Restaurant
 
 Contact:
-  Email   : abdzoro89@gmail.com / a.osman@bab.com.sa
-  Phone   : +966562984106 / +966553368212
-  Website : https://leapai.ai
+  Location  : King Abdulaziz Branch Road, Riyadh, Saudi Arabia
+  Email     : sales@leapai.ai
+  Phone     : +966 53 553 3627
+  Website   : https://leapai.ai
+  Developer : Abdulkaraim Osman — Tech Manager | Backend Engineer | DevOps Engineer
+              at Bab International Corp For Specialized Services
+  LinkedIn  : https://www.linkedin.com/in/abdulkaraim-o-385b7a110/
     ''',
     'author': 'leapai.ai',
     'website': 'https://leapai.ai',
-    'support': 'abdzoro89@gmail.com',
-    'maintainer': 'a.osman@bab.com.sa',
+    'support': 'sales@leapai.ai',
+    'maintainer': 'Abdulkaraim Osman',
     'depends': ['base', 'mail', 'product', 'uom', 'account'],
     'images': [
         'static/description/screenshots/01_room_overview.jpg',

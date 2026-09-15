@@ -77,11 +77,31 @@ table.roles tr:nth-child(even) td{background:#f8fafc}
 .cta-p{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
 .cp{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:7px 20px;font-size:.86rem;font-weight:600}
 
-.contact{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:28px 32px;margin-bottom:40px}
-.contact h3{font-size:1.1rem;font-weight:700;color:#1a3c5e;margin-bottom:16px}
-.contact table{border-collapse:collapse;width:auto}
-.contact td{padding:5px 20px 5px 0;font-size:.9rem;color:#4a5568;vertical-align:top}
-.contact td:first-child{font-weight:700;color:#1a3c5e;white-space:nowrap}
+.contact-section{background:#f8fafc;border-top:1px solid #e2e8f0}
+.contact-logo{display:block;width:72px;height:72px;object-fit:contain;margin:0 auto 16px;border-radius:14px;box-shadow:0 4px 16px rgba(26,60,94,.18)}
+.contact-section .lbl,.contact-section h2{text-align:center}
+.contact-subtitle{text-align:center;color:#4a5568;font-size:.95rem;margin:-4px 0 28px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+.contact-card{background:#fff;border:1px solid #e2e8f0;border-top:4px solid #0d7377;border-radius:10px;padding:24px 18px;text-align:center}
+.contact-card .cicon{font-size:1.7rem;margin-bottom:10px}
+.contact-card h3{font-size:.97rem;font-weight:700;color:#1a3c5e;margin-bottom:8px}
+.contact-card p{font-size:.9rem;color:#4a5568;line-height:1.55}
+.contact-card p a{color:#4a5568;text-decoration:none}
+.contact-btn{display:inline-block;margin-top:14px;background:#1a3c5e;color:#fff;padding:8px 18px;border-radius:20px;font-size:.82rem;font-weight:600;text-decoration:none}
+.contact-btn:hover,.contact-btn:focus{background:#0d7377}
+.developer-card{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,#1a3c5e,#0d7377);color:#fff;border-radius:12px;padding:24px 26px}
+.developer-avatar{flex-shrink:0;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(244,160,34,.7);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:#f4a022}
+.developer-info{flex:1}
+.developer-info h3{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.developer-info p{font-size:.86rem;opacity:.9;line-height:1.5}
+.linkedin-btn{flex-shrink:0;display:inline-block;background:#0A66C2;color:#fff;padding:9px 18px;border-radius:20px;font-size:.86rem;font-weight:600;text-decoration:none}
+.linkedin-btn:hover,.linkedin-btn:focus{background:#fff;color:#0A66C2}
+
+@media(max-width:720px){
+  .grid,.svcs,.specs,.contact-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .developer-card{flex-direction:column;text-align:center}
+}
 
 hr.div{border:none;border-top:1px solid #e2e8f0;margin:0}
 </style>
@@ -293,20 +313,49 @@ hr.div{border:none;border-top:1px solid #e2e8f0;margin:0}
   </div>
 </section>
 
-<!-- ══ CONTACT ══ -->
+<!-- ══ CONTACT LEAP AI ══ -->
+<div class="contact-section">
 <section>
-  <div class="contact">
-    <h3>📞 Contact &amp; Support</h3>
-    <table>
-      <tr><td>Developer</td><td>leapai.ai</td></tr>
-      <tr><td>Website</td><td><a href="https://leapai.ai" style="color:#0d7377">https://leapai.ai</a></td></tr>
-      <tr><td>Support Email</td><td>abdzoro89@gmail.com</td></tr>
-      <tr><td>Maintainer</td><td>a.osman@bab.com.sa</td></tr>
-      <tr><td>Phone</td><td>+966 562 984 106 / +966 553 368 212</td></tr>
-      <tr><td>Post-Deploy Support</td><td>50 days free support included</td></tr>
-    </table>
+  <img class="contact-logo" src="icon.png" alt="LEAP AI"/>
+  <div class="lbl">Get in Touch</div>
+  <h2>Contact <span>LEAP AI</span></h2>
+  <p class="contact-subtitle">King Abdulaziz Branch Road, Riyadh, Saudi Arabia</p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="cicon">📍</div>
+      <h3>Our Location</h3>
+      <p>King Abdulaziz Branch Road<br/>Riyadh, Saudi Arabia</p>
+      <a class="contact-btn"
+         href="https://www.google.com/maps/search/?api=1&amp;query=King+Abdulaziz+Branch+Road+Riyadh+Saudi+Arabia"
+         target="_blank" rel="noopener noreferrer">View on map</a>
+    </div>
+    <div class="contact-card">
+      <div class="cicon">✉️</div>
+      <h3>Send an Email</h3>
+      <p><a href="mailto:sales@leapai.ai">sales@leapai.ai</a></p>
+      <a class="contact-btn" href="mailto:sales@leapai.ai">Email us now</a>
+    </div>
+    <div class="contact-card">
+      <div class="cicon">📞</div>
+      <h3>Call Anytime</h3>
+      <p><a href="tel:+966535533627">+966 53 553 3627</a></p>
+      <a class="contact-btn" href="tel:+966535533627">Call now</a>
+    </div>
+  </div>
+
+  <div class="developer-card">
+    <div class="developer-avatar">AO</div>
+    <div class="developer-info">
+      <h3>Abdulkaraim Osman</h3>
+      <p>Tech Manager | Backend Engineer | DevOps Engineer<br/>at Bab International Corp For Specialized Services</p>
+    </div>
+    <a class="linkedin-btn"
+       href="https://www.linkedin.com/in/abdulkaraim-o-385b7a110/"
+       target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
   </div>
 </section>
+</div>
 
 <!-- ══ CTA ══ -->
 <section>
