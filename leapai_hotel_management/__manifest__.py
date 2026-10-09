@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+#  Hotel Management
+# -----------------------------------------------------------------------------
+#  Location  : King Abdulaziz Branch Road, Riyadh, Saudi Arabia
+#  Email     : sales@leapai.ai
+#  Phone     : +966 53 553 3627
+#  Website   : https://leapai.ai
+#  Developer : Abdulkaraim Osman — Tech Manager | Backend Engineer | DevOps Engineer
+#              at Bab International Corp For Specialized Services
+#  LinkedIn  : https://www.linkedin.com/in/abdulkaraim-o-385b7a110/
+# =============================================================================
 {
     'name': 'Hotel Management',
     'version': '19.0.1.0.0',
@@ -27,9 +39,9 @@ Contact:
   LinkedIn  : https://www.linkedin.com/in/abdulkaraim-o-385b7a110/
     ''',
     'author': 'leapai.ai',
-    'website': 'https://leapai.ai',
-    'support': 'sales@leapai.ai',
     'maintainer': 'Abdulkaraim Osman',
+    'support': 'sales@leapai.ai',
+    'website': 'https://leapai.ai',
     'depends': ['base', 'mail', 'product', 'uom', 'account'],
     'images': [
         'static/description/screenshots/01_room_overview.jpg',
